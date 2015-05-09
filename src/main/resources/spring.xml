@@ -32,7 +32,7 @@
         </property>
     </bean>
      
-    <bean id="userDAO" class="com.training.bd.models.UserDAOImpl">
+    <bean id="userDAO" class="com.training.bd.dao.UserDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
 </beans>

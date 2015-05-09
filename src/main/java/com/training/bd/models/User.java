@@ -7,9 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
-
 @Entity
 @Table(name="User")
 public class User {
@@ -18,7 +15,11 @@ public class User {
 	@Column(name="userID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userID;
+
+	@Column(name="username")
 	private String username;
+	
+	@Column(name="password")
 	private String password;
 	
 	public String getPassword() {

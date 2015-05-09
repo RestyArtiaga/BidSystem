@@ -1,15 +1,16 @@
 package com.training.bd.models;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.training.bd.dao.UserDAO;
+import com.training.bd.dao.*;
 
 public class Tester {
 	 public static void main(String[] args) {
 		 
-	        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+	        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 	         
-	        UserDAO UserDAO = context.getBean(UserDAO.class);
+	        UserDAO UserDAO = (UserDAO) context.getBean("userDAO");
 	         
 	        User user = new User();
 	        user.setUsername("don"); 
@@ -20,6 +21,6 @@ public class Tester {
 	        System.out.println("User::"+user.toString());
 	         
 	        
-	        context.close();    
+	            
 	    }
 }

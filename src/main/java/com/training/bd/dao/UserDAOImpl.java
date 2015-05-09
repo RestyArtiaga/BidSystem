@@ -1,11 +1,17 @@
 package com.training.bd.dao;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import com.training.bd.models.User;
 
+
+@Repository
+@Transactional
 public class UserDAOImpl implements UserDAO{
 
 	 private SessionFactory sessionFactory;
