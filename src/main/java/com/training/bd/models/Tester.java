@@ -2,6 +2,8 @@ package com.training.bd.models;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.training.bd.dao.UserDAO;
+
 public class Tester {
 	 public static void main(String[] args) {
 		 
@@ -10,8 +12,8 @@ public class Tester {
 	        UserDAO UserDAO = context.getBean(UserDAO.class);
 	         
 	        User user = new User();
-	        user.setUsername("Pankaj"); 
-	        user.setPassword("India");
+	        user.setUsername("don"); 
+	        user.setPassword("haha");
 	         
 	        UserDAO.save(user);
 	         

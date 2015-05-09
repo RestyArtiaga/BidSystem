@@ -17,8 +17,8 @@
   <body>
     <div class="container">
       <header>
-            <nav class="navbar navbar-default navbar-primary">
-            <div class="container-fluid">
+            <nav class="navbar navbar-default">
+            <div class="container-fluid danger">
               <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                   <span class="sr-only">Toggle navigation</span>
@@ -52,7 +52,7 @@
                 <th>#</th>
                 <th>Item Name</th>
                 <th>Item Description</th>
-                <th>Bid Duration</th>
+                <th>Remaining Time</th>
                 <th>Highest Bidder</th>
                 <th>Current Bid</th>
                 <th>Actions</th>

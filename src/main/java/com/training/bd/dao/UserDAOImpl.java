@@ -1,8 +1,10 @@
-package com.training.bd.models;
+package com.training.bd.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import com.training.bd.models.User;
 
 public class UserDAOImpl implements UserDAO{
 

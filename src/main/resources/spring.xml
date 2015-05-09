@@ -20,7 +20,7 @@
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
             <list>
-                <value>com.training.bd.User</value>
+                <value>com.training.bd.models.User</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -32,7 +32,7 @@
         </property>
     </bean>
      
-    <bean id="userDAO" class="com.training.bd.UserDAOImpl">
+    <bean id="userDAO" class="com.training.bd.models.UserDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
 </beans>
