@@ -1,4 +1,4 @@
-package com.training.bd;
+package com.training.bd.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

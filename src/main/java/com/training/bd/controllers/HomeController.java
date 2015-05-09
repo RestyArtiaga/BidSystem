@@ -1,4 +1,4 @@
-package com.training.bd;
+package com.training.bd.controllers;
 
 import java.text.DateFormat;
 import java.util.Date;

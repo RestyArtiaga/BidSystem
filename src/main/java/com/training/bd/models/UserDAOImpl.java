@@ -1,4 +1,4 @@
-package com.training.bd;
+package com.training.bd.models;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
