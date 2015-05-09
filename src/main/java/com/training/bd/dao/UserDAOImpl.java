@@ -1,5 +1,7 @@
 package com.training.bd.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -20,11 +22,22 @@ public class UserDAOImpl implements UserDAO{
 	        this.sessionFactory = sessionFactory;
 	    }
 	    
+	
 	@Override
-	public void save(User user) {
+	public List<User> getUserList(){
+		   Session session = this.sessionFactory.openSession(); 
+		   Transaction tx = session.beginTransaction();
+		    List<User> list = session.createCriteria(User.class).list();  
+		    tx.commit();
+		    session.close();
+		    return list;  
+	}
+
+	@Override
+	public void saveUser(User user) {
 		Session session = this.sessionFactory.openSession();
 		 Transaction tx = session.beginTransaction();
-	        session.persist(user);
+	        session.saveOrUpdate(user);
 	        tx.commit();
 	        session.close();
 		

@@ -12,13 +12,14 @@ public class Tester {
 	         
 	        UserDAO UserDAO = (UserDAO) context.getBean("userDAO");
 	         
-	        User user = new User();
-	        user.setUsername("don"); 
-	        user.setPassword("haha");
+	        //User user = new User();
+	        //user.setUserID(6);
+//	        user.setUsername("resty"); 
+//	        user.setPassword("password");
+//	         
+//	        UserDAO.saveUser(user);
 	         
-	        UserDAO.save(user);
-	         
-	        System.out.println("User::"+user.toString());
+	        System.out.println("UserList:"+UserDAO.getUserList().toString());
 	         
 	        
 	            
