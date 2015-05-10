@@ -8,5 +8,5 @@ public interface UserDAO {
 	public void saveUser(User user);
 	public List<User> getUserList();
 	public User isUser(String username,String password);
-	public List<String> getRoles(int userID);
+	
 }

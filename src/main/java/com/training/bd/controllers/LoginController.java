@@ -18,13 +18,12 @@ import com.training.bd.dao.UserDAO;
 import com.training.bd.models.User;
 
 @Controller
-@RequestMapping(value = "/user")
-public class UserController {
+public class LoginController {
 	ApplicationContext context ;
 	UserDAO userDAO ;
 	UserJDBCTemplate userJDBCTemplate;
 	
-	public UserController() {
+	public LoginController() {
 		context= new ClassPathXmlApplicationContext("spring.xml");
 		userDAO= (UserDAO) context.getBean("userDAO");
 		userJDBCTemplate = (UserJDBCTemplate)context.getBean("userJDBCTemplate");
@@ -35,10 +34,5 @@ public class UserController {
 			@RequestParam(value="password", required=true) String password){
 		return userJDBCTemplate.isUser(username, password);		
 	}
-
 	
-	@RequestMapping(value = "/role",  method = RequestMethod.GET)
-	public @ResponseBody List<String> roles(@RequestParam(value="userid", required=true) int userID){
-		return userJDBCTemplate.getRoles(userID);		
-	}
 }

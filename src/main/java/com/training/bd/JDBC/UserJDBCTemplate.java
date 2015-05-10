@@ -35,14 +35,15 @@ public class UserJDBCTemplate implements UserDAO {
 		 String SQL = "select * from user where username = ? and password = ?";
 	     User user = jdbcTemplateObject.queryForObject(SQL, 
 	                        new Object[]{username,password}, new UserMapper());
+	     
 	     if(user!=null)
 	    	 user.setRole(getRoles(user.getUserID()));
 	     else 
 	    	 return new User();
 	     return user;		
 	}
-	@Override
-	public List<String> getRoles(int userID) {
+
+	private List<String> getRoles(int userID) {
 		 String SQL = "select role from roles r,userrole ur where ur.userID = ? and r.roleID = ur.roleID";
 		 List<String> roles = jdbcTemplateObject.queryForList(SQL,new Object[]{userID},String.class);	   
 	     return roles;		

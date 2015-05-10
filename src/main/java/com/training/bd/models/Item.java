@@ -32,6 +32,7 @@ public class Item{
 	@Column(name="highestBidderID")
 	private int HighestBidderID;
 	
+	
 	public String getItemName() {
 		return itemName;
 	}
