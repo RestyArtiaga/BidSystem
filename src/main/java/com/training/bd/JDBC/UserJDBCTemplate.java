@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.training.bd.dao.UserDAO;
+import com.training.bd.models.BidPlacement;
 import com.training.bd.models.User;
 
 public class UserJDBCTemplate implements UserDAO {
@@ -47,6 +48,12 @@ public class UserJDBCTemplate implements UserDAO {
 		 String SQL = "select role from roles r,userrole ur where ur.userID = ? and r.roleID = ur.roleID";
 		 List<String> roles = jdbcTemplateObject.queryForList(SQL,new Object[]{userID},String.class);	   
 	     return roles;		
+	}
+	
+	@Override
+	public boolean placeBid(BidPlacement bid) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -17,10 +17,15 @@ public class Tester {
 	public static void main(String[] args) {
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		ItemJDBCTemplate itemJDBCTemplate  = (ItemJDBCTemplate)context.getBean("itemJDBCTemplate");
-		System.out.println(itemJDBCTemplate.getItemList().toString());
-		/*UserDAO UserDAO = (UserDAO) context.getBean("userDAO");
-		System.out.println("ID = " + UserDAO.isUser("Pankaj").toString());*/
+		
+		
+		
+		UserDAO UserDAO = (UserDAO) context.getBean("userDAO");
+		BidPlacement bid = new BidPlacement();
+		bid.setBidderID(23);
+		bid.setItemID(12);
+		bid.setPrice(124151);
+		System.out.println(UserDAO.placeBid(bid));
 		//user tests 
 //		UserDAO UserDAO = (UserDAO) context.getBean("userDAO");
 //		 

@@ -10,6 +10,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import com.training.bd.models.BidPlacement;
+import com.training.bd.models.Item;
 import com.training.bd.models.User;
 
 
@@ -64,6 +66,28 @@ public class UserDAOImpl implements UserDAO{
 	public List<String> getRoles(int userID) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public boolean placeBid(BidPlacement bid) {
+		boolean flag = false;
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		String hqlUpdate = "update " + Item.class.getName() + " set highestBidderID = :bidderID, currentPrice = :curPrice where itemID= :itemID and currentPrice < :curPrice";
+		// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
+		int updatedEntities = session.createQuery( hqlUpdate )
+		        .setInteger( "bidderID", bid.getBidderID() )
+		        .setDouble( "curPrice", bid.getPrice())
+		        .setInteger("itemID",bid.getItemID())
+		        .setDouble("curPrice",bid.getPrice())
+		        .executeUpdate();
+		tx.commit();
+		session.close();
+		if(updatedEntities>=1)
+			flag = true;
+		
+		return flag;
 	}
 
 }

@@ -38,8 +38,5 @@ public class ItemController {
 		flag = itemJDBCTemplate.getItemList();		
 		return flag;
 	}	
-		
-	
-	
-	
+			
 }
