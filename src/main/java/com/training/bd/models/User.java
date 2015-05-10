@@ -13,7 +13,6 @@ public class User {
 	
 	@Id
 	@Column(name="userID")
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userID;
 
 	@Column(name="username")
@@ -42,6 +41,7 @@ public class User {
 	}
 	
 	public String toString() {
-		return "User ID: "+this.userID;
+		return 	"User ID: "+this.userID+
+				" - User Name: "+this.username+"";
 	}
 }

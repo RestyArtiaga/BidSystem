@@ -16,11 +16,11 @@ import com.training.bd.models.User;
 @Transactional
 public class UserDAOImpl implements UserDAO{
 
-	 private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	 
-	    public void setSessionFactory(SessionFactory sessionFactory) {
-	        this.sessionFactory = sessionFactory;
-	    }
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 	    
 	
 	@Override

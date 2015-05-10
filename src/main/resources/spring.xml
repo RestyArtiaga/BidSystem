@@ -21,6 +21,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.training.bd.models.User</value>
+                <value>com.training.bd.models.Item</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -35,4 +36,12 @@
     <bean id="userDAO" class="com.training.bd.dao.UserDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
+    
+    <bean id="itemDAO" class="com.training.bd.dao.ItemDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+    
+    
+    
+    
 </beans>
