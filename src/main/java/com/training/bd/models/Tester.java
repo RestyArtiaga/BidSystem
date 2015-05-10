@@ -6,8 +6,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.training.bd.dao.*;
 
+import com.training.bd.dao.*;
 import com.training.*;
 
 public class Tester {
@@ -16,6 +16,8 @@ public class Tester {
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		
+		/*UserDAO UserDAO = (UserDAO) context.getBean("userDAO");
+		System.out.println("ID = " + UserDAO.isUser("Pankaj").toString());*/
 		//user tests 
 //		UserDAO UserDAO = (UserDAO) context.getBean("userDAO");
 //		 
@@ -31,7 +33,7 @@ public class Tester {
 		
 		//item tests
 		//ApplicationContext ctx = new AnnotationConfigApplicationContext("spring.xml");
-		
+	/*	
 		ItemDAO itemDAO = (ItemDAO) context.getBean("itemDAO");
 		 
 		Item i = new Item();
@@ -43,7 +45,7 @@ public class Tester {
 		i.setHighestBidder(1);
 		i.setItemDescription("wooooow");
 		 
-		itemDAO.saveItem(i);
+		itemDAO.saveItem(i);*/
 //		for(User el : UserDAO.getUserList() ) {
 //			System.out.println( el.toString() );
 //		}

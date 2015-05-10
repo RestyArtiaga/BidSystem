@@ -1,5 +1,7 @@
 package com.training.bd.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +22,16 @@ public class User {
 	
 	@Column(name="password")
 	private String password;
+	
+	
+	private transient List<String> role;
+	
+	public void setRole(List<String> role) {
+		this.role = role;
+	}
+	public List<String> getRole() {
+		return role;
+	}
 	
 	public String getPassword() {
 		return password;
