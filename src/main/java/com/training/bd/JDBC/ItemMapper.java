@@ -15,10 +15,11 @@ public class ItemMapper implements RowMapper<Item>{
 		item.setItemID(rs.getInt("itemID"));
 		item.setUserID(rs.getInt("userID"));
 		item.setItemName(rs.getString("itemName"));
-		item.setItemDescription(rs.getString("description"));
+		item.setItemDescription(rs.getString("itemDescription"));
 		item.setDuration(rs.getInt("duration"));
 		item.setHighestBidderID(rs.getInt("highestBidderID"));
 		item.setCurrentPrice(rs.getDouble("currentPrice"));
+		item.setCreatedAt(rs.getDate("createdAt"));
 		return item;
 	}
 

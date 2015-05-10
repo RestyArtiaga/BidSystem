@@ -7,6 +7,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
+
+import com.training.bd.JDBC.ItemJDBCTemplate;
 import com.training.bd.dao.*;
 import com.training.*;
 
@@ -15,7 +17,8 @@ public class Tester {
 	public static void main(String[] args) {
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		
+		ItemJDBCTemplate itemJDBCTemplate  = (ItemJDBCTemplate)context.getBean("itemJDBCTemplate");
+		System.out.println(itemJDBCTemplate.getItemList().toString());
 		/*UserDAO UserDAO = (UserDAO) context.getBean("userDAO");
 		System.out.println("ID = " + UserDAO.isUser("Pankaj").toString());*/
 		//user tests 

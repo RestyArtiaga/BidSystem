@@ -1,5 +1,7 @@
 package com.training.bd.models;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,7 +22,7 @@ public class Item{
 	@Column(name="userID")
 	private int userID;
 	
-	@Column(name="description")
+	@Column(name="itemDescription")
 	private String itemDescription;
 	
 	@Column(name="duration")
@@ -32,6 +34,16 @@ public class Item{
 	@Column(name="highestBidderID")
 	private int HighestBidderID;
 	
+	
+	private transient Date createdAt;
+	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 	
 	public String getItemName() {
 		return itemName;
