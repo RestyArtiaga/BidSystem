@@ -36,10 +36,9 @@ public class UserController {
 		
 	
  
-	@RequestMapping(value = "/login",  method = RequestMethod.GET)
-	public @ResponseBody User user(@RequestParam(value="username", required=true) String username,
-			@RequestParam(value="password", required=true) String password){
-		return userJDBCTemplate.isUser(username, password);		
+	@RequestMapping(value = "/login",  method = RequestMethod.POST)
+	public @ResponseBody User user(@ModelAttribute final User user){
+		return userJDBCTemplate.isUser(user.getUsername(), user.getPassword());		
 	}
 	
 	@RequestMapping(value="/user/placeBid", method=RequestMethod.POST)

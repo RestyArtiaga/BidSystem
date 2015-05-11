@@ -1,6 +1,20 @@
 package com.training.bd.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.NavigableMap;
+import java.util.Queue;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.Vector;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -8,56 +22,44 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import com.training.bd.JDBC.ItemJDBCTemplate;
 import com.training.bd.dao.*;
 import com.training.*;
 
-public class Tester {
-    
-	public static void main(String[] args) {
-		
-		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		
-		
-		
-		UserDAO UserDAO = (UserDAO) context.getBean("userDAO");
-		BidPlacement bid = new BidPlacement();
-		bid.setBidderID(23);
-		bid.setItemID(12);
-		bid.setPrice(124151);
-		System.out.println(UserDAO.placeBid(bid));
-		//user tests 
-//		UserDAO UserDAO = (UserDAO) context.getBean("userDAO");
-//		 
-//		User user = new User();
-//		user.setUserID(6);
-//		user.setUsername("ye"); 
-//		user.setPassword("password");
-//		UserDAO.saveUser(user);
-//		 
-//		for(User el : UserDAO.getUserList() ) {
-//			System.out.println( el.toString() );
-//		}
-		
-		//item tests
-		//ApplicationContext ctx = new AnnotationConfigApplicationContext("spring.xml");
-	/*	
-		ItemDAO itemDAO = (ItemDAO) context.getBean("itemDAO");
-		 
-		Item i = new Item();
-		
-		i.setItemName("selpon"); 
-		i.setUserID(1);
-		i.setDuration(2);
-		i.setCurrentPrice(10.1);
-		i.setHighestBidder(1);
-		i.setItemDescription("wooooow");
-		 
-		itemDAO.saveItem(i);*/
-//		for(User el : UserDAO.getUserList() ) {
-//			System.out.println( el.toString() );
-//		}
-		
-	}
-	
+
+class Tester{ 
+	 public static void main(String[] args) { 
+
+
+	        String[] arr = { "Java", "Champ", "." };
+	        List<String> list = (List<String>) Arrays.asList(arr); // line 1
+	        arr[2] = ".com"; // line 2
+	        for (String word : list) {
+	            System.out.print(word);
+	        }
+
+
+		 } 
+
+
 }
+
+
+
+
+
+
