@@ -4,3 +4,7 @@ header {
 .container{
 	width: 80%;
 }
+.login-container{
+	width: 20%;
+	margin: 200px auto;
+}
