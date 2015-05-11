@@ -17,7 +17,7 @@
   <body>
     <div class="login-container">
 
-      <form class="form-signin" action="<c:url value='/login' />">
+      <form class="form-signin" action="<c:url value='/login' />" method="POST">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Username</label>
         <input type="text" id="username" class="form-control" placeholder="Username" required="" autofocus="">
