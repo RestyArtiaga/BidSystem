@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,13 +37,15 @@ public class UserController {
 		
 	
  
-	@RequestMapping(value = "/login",  method = RequestMethod.POST)
-	public @ResponseBody User user(@ModelAttribute final User user){
+	@RequestMapping(value = "/login", consumes="application/json",  method = RequestMethod.POST)
+	public @ResponseBody User user(@RequestBody final User user){
+		//return user;
 		return userJDBCTemplate.isUser(user.getUsername(), user.getPassword());		
 	}
 	
-	@RequestMapping(value="/user/placeBid", method=RequestMethod.POST)
-	public @ResponseBody boolean item(@ModelAttribute final BidPlacement bidPlacement){
+	@RequestMapping(value="/user/placeBid",consumes="application/json", method=RequestMethod.POST)
+	public @ResponseBody boolean item(@RequestBody final BidPlacement bidPlacement){
+		//return bidPlacement;
 		return userDAO.placeBid(bidPlacement);						
 	}
 }
