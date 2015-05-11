@@ -34,8 +34,8 @@ public class AdminController {
 		
 	}
 		
-	@RequestMapping(value="addItem",consumes="application/json", method = RequestMethod.POST)
-	public @ResponseBody Item item(@RequestBody final Item item){
+	@RequestMapping(value="addItem", method = RequestMethod.POST)
+	public @ResponseBody Item item(Item item){
 		//itemDAO.saveItem(item);					
 		return item;
 	}

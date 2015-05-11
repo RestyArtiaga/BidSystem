@@ -10,8 +10,9 @@
     
     <title>Bidding System</title>
 
-    <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/assets/css/override.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/assets/css/override.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/assets/css/jquery.dataTables.css">
 
   </head>
   <body>
@@ -47,7 +48,8 @@
       <main>
         <div class="panel panel-primary">
           <div class="panel-heading">Item Lists</div>
-          <table class="table">
+          <table id="example" class="display" cellspacing="0" width="100%">
+            <thead>
               <tr>
                 <th>#</th>
                 <th>Item Name</th>
@@ -56,24 +58,43 @@
                 <th>Highest Bidder</th>
                 <th>Current Bid</th>
                 <th>Actions</th>
+                <th>Actions</th>
+                <th>Actions</th>
+                <th>Actions</th>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>laptop</td>
-                <td>Very new</td>
-                <td>1 week</td>
-                <td>Inah</td>
-                <td>$400</td>
-                <td><button type="button" class="btn btn-success btn-xs">Bid on this item</button></td>
-              </tr>
+            </thead>              
           </table>
           </div>
       </main>
     </div><!-- /container -->
 
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/resources/assets/js/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/resources/assets/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" class="init">
+
+      $(document).ready(function() {
+        $('#example').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": "<c:url value='/getAllItems' />",
+          "dataType": "json",
+          "columns": [
+            { "data": "itemID" },
+            { "data": "itemName" },
+            { "data": "userID" },
+            { "data": "itemDescription" },
+            { "data": "duration" },
+            { "data": "currentPrice" },
+            { "data": "duration" },
+            { "data": "highestBidderID" },
+            { "data": "createdAt" },
+            { "data": "highestBidder" }
+        ]
+        } );
+      } );
+
+    </script>
   </body>
 </html>
