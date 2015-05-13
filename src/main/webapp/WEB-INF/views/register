@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     
-    <title>Bidding System - Login</title>
+    <title>Bidding System - Register</title>
 
     <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/assets/css/override.css" rel="stylesheet">
@@ -18,18 +18,15 @@
     <div class="login-container">
 
       <form class="form-signin" action="<c:url value='/login' />" method="POST">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Register New User</h2>
         <label for="inputEmail" class="sr-only">Username</label>
         <input type="text" id="username" class="form-control" placeholder="Username" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="password" class="form-control" placeholder="Password" required="">
+        <label for="inputPassword2" class="sr-only">Password</label>
+        <input type="password" id="password2" class="form-control" placeholder="Verify Password" required="">
         
-        <div class="checkbox">
-          
-            <a type="checkbox" href="<c:url value='/formRegister' />" >Register</a>
-          
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
       </form>
 
     </div> 
@@ -41,13 +38,12 @@
     <script>
 
             $("button").click(
-
+                
                 function(){
+
                     var arr = {    
                         "itemName": $("#itemName").val(), 
-                        "itemDescription": $("#itemDescription").val(),
-                        "duration": $("#duration").val(),
-                        "currentPrice": $("#currentPrice").val()
+                        "itemDescription": $("#itemDescription").val()
                         }; 
 
                     $.ajax({
