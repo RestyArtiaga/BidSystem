@@ -17,13 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 
+
+
 import com.training.bd.dao.UserDAO;
 import com.training.bd.dao.UserDAO;
 import com.training.bd.models.BidPlacement;
 import com.training.bd.models.Item;
 import com.training.bd.models.LoginObject;
+import com.training.bd.models.Role;
 import com.training.bd.models.User;
 import com.training.bd.models.User;
+import com.training.bd.models.UserFromWeb;
 
 @Controller
 
@@ -39,15 +43,14 @@ public class UserController {
 	}			
  
 	@RequestMapping(value = "/login",consumes="application/json", method = RequestMethod.POST)
-	public @ResponseBody User user(@RequestBody final LoginObject user){
-		//return user;
-		return userDAO.isUser(user.getUsername(),user.getPassword());	
-	
+	public @ResponseBody User user(@RequestBody final LoginObject user){		
+		return userDAO.isUser(user.getUsername(),user.getPassword());		
 	}
 	
 	@RequestMapping(value = "/register",consumes="application/json", method = RequestMethod.POST)
-	public @ResponseBody void reg(@RequestBody final User user){
-		userDAO.register(user);		
+	public @ResponseBody UserFromWeb reg(@RequestBody final UserFromWeb user){
+		userDAO.register(user);	
+		return user;
 	}
 		
 }

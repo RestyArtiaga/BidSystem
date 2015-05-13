@@ -15,8 +15,10 @@ import com.training.bd.models.BidPlacement;
 import com.training.bd.models.Item;
 import com.training.bd.models.Item;
 import com.training.bd.models.LoginObject;
+import com.training.bd.models.Role;
 import com.training.bd.models.User;
 import com.training.bd.models.User;
+import com.training.bd.models.UserFromWeb;
 
 @Repository
 @Transactional
@@ -47,10 +49,15 @@ public class UserDAOImpl implements UserDAO{
 	
 
 	@Override
-	public void register(User user) {
+	public void register(UserFromWeb user) {
+		User userMain = new User();
+		userMain.setUsername(user.getUsername());
+		userMain.setPassword(user.getPassword());
+		userMain.setRoles(new Role());
+		userMain.getRole().setRoleID(user.getRoleID());
 		Session session = this.sessionFactory.openSession();
 		 Transaction tx = session.beginTransaction();
-	        session.saveOrUpdate(user);	       
+	        session.saveOrUpdate(userMain);	       
 	        tx.commit();
 	        session.close();
 	}

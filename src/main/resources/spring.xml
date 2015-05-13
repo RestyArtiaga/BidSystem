@@ -25,7 +25,7 @@
                 <value>com.training.bd.models.Role</value>
                 <value>com.training.bd.models.BidHistory</value>
                 <value>com.training.bd.models.BidPlacement</value>   
-          
+          	
             </list>
         </property>
         <property name="hibernateProperties">
