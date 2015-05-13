@@ -11,6 +11,7 @@ import com.training.bd.models.UserFromWeb;
 public interface UserDAO {
 	public User isUser(String username,String password);
 	public void register(UserFromWeb user);
+	public boolean usernameExists(String username);
 	/*public void saveUser(User user);
 	public List<User> getUserList();
 	public User isUser(String username,String password);*/

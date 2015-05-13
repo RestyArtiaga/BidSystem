@@ -62,6 +62,19 @@ public class UserDAOImpl implements UserDAO{
 	        session.close();
 	}
 
+
+	@Override
+	public boolean usernameExists(String username) {
+		boolean flag = false;
+		Session session = this.sessionFactory.openSession();
+		Query query = session.createQuery("from User where username = :un");
+		query.setParameter("un", username);		
+		List<User> list = (List<User>) query.list();	
+		if(list.size()>0)
+			flag = true;
+		return flag;
+	}
+
 	/*
 	public void saveUser(User user) {		
 		Session session = this.sessionFactory.openSession();
