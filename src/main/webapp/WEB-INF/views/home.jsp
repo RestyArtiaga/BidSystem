@@ -12,7 +12,6 @@
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/assets/css/override.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/assets/css/jquery.dataTables.css">
 
   </head>
   <body>
@@ -28,71 +27,59 @@
                   <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">Bidding System</a>
+                
               </div>
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">home <span class="sr-only">(current)</span></a></li>
-                 
-                </ul>
-                <form class="navbar-form navbar-right" role="search">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Username">
-                    <input type="password" class="form-control" placeholder="Password">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Login</button>
-                </form>
-              </div>
+     
+      
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="formLogin">Sign In</a></li>
+                    
+                  </ul>
+                </div>
             </div>
         </nav>        
       </header>
       <main>
         <div class="panel panel-primary">
           <div class="panel-heading">Item Lists</div>
-          <table id="example" class="display" cellspacing="0" width="100%">
+          <table id="example" class="table table-hover" cellspacing="0" width="100%">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Item Name</th>
-                <th>Item Description</th>
-                <th>Remaining Time</th>
-                <th>Highest Bidder</th>
-                <th>Current Bid</th>
-                <th>Actions</th>
-                <th>Actions</th>
-                <th>Actions</th>
-                <th>Actions</th>
+                <th>itemName</th>
+                <th>itemDescription</th>
+                <th>duration</th>
+                <th>currentPrice</th>
+                <th></th>
               </tr>
-            </thead>              
+            </thead>
+            <tbody>
+              
+            </tbody>            
           </table>
           </div>
       </main>
     </div><!-- /container -->
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/resources/assets/js/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/resources/assets/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" language="javascript" class="init">
 
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" language="javascript" class="init">
       $(document).ready(function() {
-        $('#example').DataTable({
-          "processing": true,
-          "serverSide": true,
-          "ajax": "<c:url value='/getAllItems' />",
-          "dataType": "json",
-          "columns": [
-            { "data": "itemID" },
-            { "data": "itemName" },
-            { "data": "userID" },
-            { "data": "itemDescription" },
-            { "data": "duration" },
-            { "data": "currentPrice" },
-            { "data": "duration" },
-            { "data": "highestBidderID" },
-            { "data": "createdAt" },
-            { "data": "highestBidder" }
-        ]
-        } );
+           $.get("getAllItems", function(data, status){
+              //alert(data[0]["itemName"]);
+              var tableData="";
+              for(var i=0;i<data.length;i++){
+                tableData+=("<tr><td>"+data[i]["itemName"]+"</td>");
+                tableData+=("<td>"+data[i]["itemDescription"]+"</td>");
+                tableData+=("<td>"+data[i]["duration"]+"</td>");
+                tableData+=("<td>"+data[i]["currentPrice"]+"</td>");
+                tableData+=("<td><a class='btn btn-success btn-xs' href='placeBid' role='button'>BID</a></td></tr>");
+              }
+              $("tbody").html(tableData);
+          });
       } );
 
     </script>
