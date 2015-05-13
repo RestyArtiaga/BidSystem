@@ -1,5 +1,6 @@
 package com.training.bd.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -14,9 +15,10 @@ import com.training.bd.models.BidHistory;
 import com.training.bd.models.Item;
 import com.training.bd.models.Item;
 import com.training.bd.models.ItemDetails;
-import com.training.bd.models.ItemFromWeb;
+import com.training.bd.models.Role;
 import com.training.bd.models.User;
 import com.training.bd.models.User;
+import com.training.bd.webModels.ItemFromWeb;
 
 public class ItemDAOImpl implements ItemDAO{
 
@@ -62,16 +64,42 @@ public class ItemDAOImpl implements ItemDAO{
 	}
 
 	@Override
-	public List<Item> getItemList() {
+	public List<Item> getItemList() {	
 		Session session = this.sessionFactory.openSession();
-		Query query = session.createQuery("from " + Item.class.getName() +" it inner join " + BidHistory.class.getName()
-					+ " bh on it.itemID = bh.itemID ");				
-		List<Item> list = (List<Item>) query.list();	
-		session.close();							
+		Query query = session.createQuery("from " + Item.class.getName());				
+		List<Item> list = (List<Item>) query.list();		
+		session.close();
+	
 		return list;
+	}
+
+	@Override
+	public void saveItem(ItemFromWeb item) {
+		Item itemMain = new Item();
+		itemMain.setDuration(item.getDuration());
+		itemMain.setItemName(item.getItemName());
+		itemMain.setItemDescription(item.getItemDescription());		
+		itemMain.setUser(new User());
+		itemMain.getUser().setUserID(item.getUserID());
+		BidHistory bid = new BidHistory();
+		
+		bid.setPrice(item.getPrice());
+		bid.setUserID(new User());
+		bid.getUserID().setUserID(item.getUserID());
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();		
+		session.save(itemMain);	    
+	    tx.commit();	    	   	    
+	    tx = session.beginTransaction();
+	    bid.setItem(itemMain);
+	    session.save(bid);
+	    tx.commit();	
+	    session.close();
+	    //System.out.println(itemMain.getItemID());
 	}
 
 
 	
 	
 }
+

@@ -21,7 +21,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
+
+
 import com.training.bd.dao.*;
+import com.training.bd.webModels.ItemFromWeb;
 import com.training.*;
 
 
@@ -30,9 +33,17 @@ class Tester{
 		 ApplicationContext context ;
 			
 							
-		 context= new ClassPathXmlApplicationContext("spring.xml");
+		context= new ClassPathXmlApplicationContext("spring.xml");
 		ItemDAOImpl itemDAO = (ItemDAOImpl) context.getBean("itemDAO");
-		System.out.println(itemDAO.getItemList());
+		ItemFromWeb item = new ItemFromWeb();
+		item.setItemName("asdfasdfasfsadf");
+		item.setItemDescription("blkjzlxkcjviouaf");
+		item.setPrice(124124);
+		item.setUserID(1);
+		
+		
+		itemDAO.saveItem(item);
+		
 	 } 
 
 

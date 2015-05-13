@@ -20,16 +20,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 import com.training.bd.dao.UserDAO;
 import com.training.bd.dao.UserDAO;
-import com.training.bd.models.BidPlacement;
+
 import com.training.bd.models.Item;
 import com.training.bd.models.ItemDetails;
 import com.training.bd.models.LoginObject;
 import com.training.bd.models.Role;
 import com.training.bd.models.User;
 import com.training.bd.models.User;
-import com.training.bd.models.UserFromWeb;
+import com.training.bd.webModels.UserFromWeb;
 
 @Controller
 
@@ -60,5 +61,7 @@ public class UserController {
 		userDAO.register(user);	
 		return user;
 	}
+	
+	
 		
 }

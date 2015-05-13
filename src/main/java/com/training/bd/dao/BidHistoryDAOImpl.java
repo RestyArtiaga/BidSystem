@@ -8,10 +8,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.training.bd.models.BidHistory;
-import com.training.bd.models.BidPlacement;
 import com.training.bd.models.Item;
-import com.training.bd.models.ItemFromWeb;
 import com.training.bd.models.User;
+import com.training.bd.webModels.BidFromWeb;
+import com.training.bd.webModels.ItemFromWeb;
 
 public class BidHistoryDAOImpl implements BidHistoryDAO {
 	private SessionFactory sessionFactory;
@@ -29,14 +29,14 @@ public class BidHistoryDAOImpl implements BidHistoryDAO {
 	    session.close();
 	}
 	@Override
-	public boolean placeBid(BidPlacement bidPlacement) {
+	public boolean placeBid(BidFromWeb bidPlacement) {
 		boolean flag = false;
 		if(bidPlacement.getPrice() > getHighestBid(bidPlacement.getItemID())){
 			BidHistory bh = new BidHistory();
 			Item item = new Item();
 			item.setItemID(bidPlacement.getItemID());
 			User user = new User();
-			user.setUserID(bidPlacement.getBidderID());
+			user.setUserID(bidPlacement.getUserID());
 			bh.setItem(item);
 			bh.setUserID(user);
 			bh.setPrice(bidPlacement.getPrice());

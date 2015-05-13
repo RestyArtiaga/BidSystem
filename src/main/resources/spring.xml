@@ -23,9 +23,7 @@
                 <value>com.training.bd.models.User</value>
                 <value>com.training.bd.models.Item</value>
                 <value>com.training.bd.models.Role</value>
-                <value>com.training.bd.models.BidHistory</value>
-                <value>com.training.bd.models.BidPlacement</value>   
-          	
+                <value>com.training.bd.models.BidHistory</value>                            	
             </list>
         </property>
         <property name="hibernateProperties">
