@@ -87,7 +87,8 @@
             $("button").click(
 
                 function(){
-                    var arr = {    
+                    var arr = {
+                        "userID": 1,  
                         "itemName": $("#itemName").val(), 
                         "itemDescription": $("#itemDescription").val(),
                         "duration": $("#duration").val(),
@@ -95,7 +96,7 @@
                         }; 
 
                     $.ajax({
-                        url: 'admin/addItem',
+                        url: 'addItem',
                         type: 'POST',
                         data: JSON.stringify(arr),
                         contentType: 'application/json; charset=utf-8',

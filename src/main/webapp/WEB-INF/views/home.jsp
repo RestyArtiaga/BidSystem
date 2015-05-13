@@ -81,6 +81,25 @@
               $("tbody").html(tableData);
           });
       } );
+      $(document).ready(function() {
+              var asdasdas= [{
+                    "itemID":4,
+                    "user":{
+                      "userID":1,
+                      "username":"wickedzick",
+                      "password":"anklebreaker",
+                      "role":{
+                        "roleID":1,
+                        "role":"admin"
+                        }
+                      },
+                    "itemName":"celpona",
+                    "itemDescription":"asbasdbasb",
+                    "duration":12,
+                    "createdAt":null
+                    }]
+            alert(asdasdas[0]["user"]);
+      });
 
     </script>
   </body>

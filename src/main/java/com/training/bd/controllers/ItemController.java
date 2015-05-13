@@ -48,7 +48,7 @@ public class ItemController {
 		return iDetails;
 	}
 	
-	@RequestMapping(value="addItem",consumes="application/json", method = RequestMethod.POST)
+	@RequestMapping(value="/addItem",consumes="application/json", method = RequestMethod.POST)
 	public @ResponseBody Object item(@RequestBody ItemFromWeb item){
 	//	itemDAO.saveItem(item);		
 		return item;
