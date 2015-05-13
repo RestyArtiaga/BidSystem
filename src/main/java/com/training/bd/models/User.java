@@ -2,16 +2,27 @@ package com.training.bd.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
+
+
 @Entity
-@Table(name="User")
+@Table(name="user")
 public class User {
+	
 	
 	@Id
 	@Column(name="userID")
@@ -23,37 +34,37 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "roleID")
+	@JsonManagedReference
+	private Role role;	
 	
-	private transient List<String> role;
+
+	@OneToMany(mappedBy="itemID", fetch = FetchType.EAGER, cascade = CascadeType.ALL)		 
+	@JsonBackReference
+	private List<Item> items;
 	
-	public void setRole(List<String> role) {
-		this.role = role;
-	}
-	public List<String> getRole() {
-		return role;
-	}
 	
-	public String getPassword() {
-		return password;
-	}
-	public int getUserID() {
-		return userID;
-	}
-	public String getUsername() {
-		return username;
-	}
+	public List<Item> getItems() {
+		return items;
+	}public void setItems(List<Item> items) {
+		this.items = items;
+	}	
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public void setUserID(int userID) {
+	}public void setRoles(Role role) {
+		this.role= role;
+	}public void setUserID(int userID) {
 		this.userID = userID;
-	}
-	public void setUsername(String username) {
+	}public void setUsername(String username) {
 		this.username = username;
-	}
-	
-	public String toString() {
-		return 	"User ID: "+this.userID+
-				" - User Name: "+this.username+"";
+	}public String getPassword() {
+		return password;
+	}public Role getRole() {
+		return role;
+	}public int getUserID() {
+		return userID;
+	}public String getUsername() {
+		return username;
 	}
 }

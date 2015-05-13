@@ -21,39 +21,19 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import com.training.bd.JDBC.ItemJDBCTemplate;
 import com.training.bd.dao.*;
 import com.training.*;
 
 
 class Tester{ 
 	 public static void main(String[] args) { 
-
-
-	        String[] arr = { "Java", "Champ", "." };
-	        List<String> list = (List<String>) Arrays.asList(arr); // line 1
-	        arr[2] = ".com"; // line 2
-	        for (String word : list) {
-	            System.out.print(word);
-	        }
-
-
-		 } 
+		 ApplicationContext context ;
+			
+							
+		 context= new ClassPathXmlApplicationContext("spring.xml");
+		ItemDAOImpl itemDAO = (ItemDAOImpl) context.getBean("itemDAO");
+		System.out.println(itemDAO.getItemList());
+	 } 
 
 
 }

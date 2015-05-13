@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2015 at 09:35 PM
+-- Generation Time: May 13, 2015 at 08:23 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -23,27 +23,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employee`
+-- Table structure for table `bidhistory`
 --
 
-CREATE TABLE IF NOT EXISTS `employee` (
-  `id` int(11) unsigned NOT NULL,
-  `name` varchar(20) DEFAULT NULL,
-  `role` varchar(20) DEFAULT NULL,
-  `insert_time` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `bidhistory` (
+  `bidID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `itemID` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `employee`
+-- Dumping data for table `bidhistory`
 --
 
-INSERT INTO `employee` (`id`, `name`, `role`, `insert_time`) VALUES
-(1, 'Pankaj', 'CEO', '2015-05-08 09:48:42'),
-(2, 'Pankaj', 'CEO', '2015-05-08 09:48:56'),
-(3, 'Pankaj', 'CEO', '2015-05-08 09:49:21'),
-(4, 'Pankaj', 'CEO', '2015-05-08 09:50:42'),
-(5, 'Pankaj', 'CEO', '2015-05-08 09:51:40'),
-(6, 'Pankaj', 'CEO', '2015-05-08 10:09:28');
+INSERT INTO `bidhistory` (`bidID`, `userID`, `itemID`, `price`, `createdAt`) VALUES
+(1, 1, 11, 19999, '2015-05-13 09:37:12'),
+(2, 1, 4, 10000, '2015-05-13 09:37:12'),
+(4, 1, 4, 10001, '2015-05-13 10:14:35');
 
 -- --------------------------------------------------------
 
@@ -52,30 +50,38 @@ INSERT INTO `employee` (`id`, `name`, `role`, `insert_time`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `item` (
-  `itemID` int(11) NOT NULL,
-  `userID` int(11) NOT NULL,
-  `description` varchar(100) DEFAULT NULL,
+  `itemId` int(11) NOT NULL,
+  `itemName` varchar(25) DEFAULT NULL,
+  `itemDescription` varchar(100) DEFAULT NULL,
   `duration` int(11) DEFAULT NULL,
-  `currentPrice` double DEFAULT NULL,
-  `highestBidderID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `userID` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `item`
+--
+
+INSERT INTO `item` (`itemId`, `itemName`, `itemDescription`, `duration`, `createdAt`, `userID`) VALUES
+(4, 'celpona', 'asbasdbasb', 12, '2015-05-13 12:32:03', 1),
+(11, 'bobot', 'asdfasdfasdf', 42, '2015-05-13 13:02:42', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Table structure for table `role`
 --
 
-CREATE TABLE IF NOT EXISTS `roles` (
+CREATE TABLE IF NOT EXISTS `role` (
   `roleID` int(11) NOT NULL,
   `role` varchar(15) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `roles`
+-- Dumping data for table `role`
 --
 
-INSERT INTO `roles` (`roleID`, `role`) VALUES
+INSERT INTO `role` (`roleID`, `role`) VALUES
 (1, 'admin'),
 (2, 'user');
 
@@ -88,15 +94,16 @@ INSERT INTO `roles` (`roleID`, `role`) VALUES
 CREATE TABLE IF NOT EXISTS `user` (
   `userID` int(11) NOT NULL,
   `username` varchar(25) NOT NULL,
-  `password` varchar(25) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `password` varchar(25) NOT NULL,
+  `roleID` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`userID`, `username`, `password`) VALUES
-(3, 'Pankaj', 'India');
+INSERT INTO `user` (`userID`, `username`, `password`, `roleID`) VALUES
+(1, 'wickedzick', 'anklebreaker', 1);
 
 -- --------------------------------------------------------
 
@@ -110,25 +117,34 @@ CREATE TABLE IF NOT EXISTS `userrole` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `userrole`
+--
+
+INSERT INTO `userrole` (`userID`, `roleID`) VALUES
+(3, 1),
+(3, 2),
+(19, 2);
+
+--
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `employee`
+-- Indexes for table `bidhistory`
 --
-ALTER TABLE `employee`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `bidhistory`
+  ADD PRIMARY KEY (`bidID`);
 
 --
 -- Indexes for table `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`itemID`);
+  ADD PRIMARY KEY (`itemId`);
 
 --
--- Indexes for table `roles`
+-- Indexes for table `role`
 --
-ALTER TABLE `roles`
+ALTER TABLE `role`
   ADD PRIMARY KEY (`roleID`);
 
 --
@@ -148,25 +164,20 @@ ALTER TABLE `userrole`
 --
 
 --
--- AUTO_INCREMENT for table `employee`
+-- AUTO_INCREMENT for table `bidhistory`
 --
-ALTER TABLE `employee`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+ALTER TABLE `bidhistory`
+  MODIFY `bidID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemID` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `roles`
---
-ALTER TABLE `roles`
-  MODIFY `roleID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

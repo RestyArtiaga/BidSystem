@@ -1,26 +1,37 @@
 package com.training.bd.models;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 @Entity
-@Table(name="Item")
-public class Item{
-	
-	@Id
-	@Column(name="itemID")	
-	private int itemID;
+@Table(name="item")
+public class Item {
 
+	@Id
+	@Column(name="itemID")
+	private int itemID;
+		
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userID")
+	@JsonManagedReference
+	private User user;	
+	
 	@Column(name="itemName")
 	private String itemName;
-	
-	@Column(name="userID")
-	private int userID;
 	
 	@Column(name="itemDescription")
 	private String itemDescription;
@@ -28,79 +39,42 @@ public class Item{
 	@Column(name="duration")
 	private int duration;
 	
-	@Column(name="currentPrice")
-	private double currentPrice;
-	
-	@Column(name="highestBidderID")
-	private int HighestBidderID;
-	
-	
+	@Column(name="createdAt")
 	private transient Date createdAt;
 	
+
+	@OneToMany(mappedBy="bidID", fetch = FetchType.EAGER, cascade = CascadeType.ALL)		
+	@JsonIgnore
+	private List<BidHistory> bids;
+	
+	public List<BidHistory> getBids() {
+		return bids;
+	}public void setBids(List<BidHistory> bids) {
+		this.bids = bids;
+	}
 	public Date getCreatedAt() {
 		return createdAt;
-	}
-	
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-	
-	public String getItemName() {
-		return itemName;
-	}
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-	public int getDuration() {
+	}public int getDuration() {
 		return duration;
-	}
-	public int getUserID() {
-		return userID;
-	}
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
-	public String getItemDescription() {
+	}public String getItemDescription() {
 		return itemDescription;
-	}
-	public void setItemDescription(String itemDescription) {
-		this.itemDescription = itemDescription;
-	}
-	public int getHighestBidderID() {
-		return HighestBidderID;
-	}
-	public void setHighestBidderID(int highestBidderID) {
-		HighestBidderID = highestBidderID;
-	}
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-	public double getCurrentPrice() {
-		return currentPrice;
-	}
-	public void setCurrentPrice(double currentPrice) {
-		this.currentPrice = currentPrice;
-	}
-	public int getHighestBidder() {
-		return HighestBidderID;
-	}
-	public void setHighestBidder(int highestBidder) {
-		HighestBidderID = highestBidder;
-	}
-	public int getItemID() {
+	}public int getItemID() {
 		return itemID;
-	}
-	public void setItemID(int itemID) {
+	}public String getItemName() {
+		return itemName;
+	}public User getUser() {
+		return user;
+	}public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}public void setDuration(int duration) {
+		this.duration = duration;
+	}public void setItemDescription(String itemDescription) {
+		this.itemDescription = itemDescription;
+	}public void setItemID(int itemID) {
 		this.itemID = itemID;
+	}public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}public void setUser(User user) {
+		this.user = user;
 	}
-
-	public String toString() {
-		return 	"\nItem Name: " + itemName +
-				"\nOwner: " + userID +
-				"\nItem Description: " + itemDescription +
-				"\nBid Duration" + duration +
-				"\nCurrent Bid : " + currentPrice +
-				"\nHighest Bidder" + HighestBidderID;
-	}
-
 }

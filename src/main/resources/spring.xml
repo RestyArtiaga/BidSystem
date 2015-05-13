@@ -22,6 +22,10 @@
             <list>
                 <value>com.training.bd.models.User</value>
                 <value>com.training.bd.models.Item</value>
+                <value>com.training.bd.models.Role</value>
+                <value>com.training.bd.models.BidHistory</value>
+                <value>com.training.bd.models.BidPlacement</value>   
+          
             </list>
         </property>
         <property name="hibernateProperties">
@@ -40,14 +44,9 @@
     <bean id="itemDAO" class="com.training.bd.dao.ItemDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
-     
-   <bean id="userJDBCTemplate" 
-      class="com.training.bd.JDBC.UserJDBCTemplate">
-      <property name="dataSource"  ref="dataSource" />    
-   </bean>
-   <bean id="itemJDBCTemplate" 
-      class="com.training.bd.JDBC.ItemJDBCTemplate">
-      <property name="dataSource"  ref="dataSource" />    
-   </bean>
-    
+      
+    <bean id="bidHistoryDAO" class="com.training.bd.dao.BidHistoryDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>            
+   
 </beans>

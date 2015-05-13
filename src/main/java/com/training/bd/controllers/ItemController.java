@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.training.bd.JDBC.ItemJDBCTemplate;
+
 
 import com.training.bd.dao.ItemDAO;
+import com.training.bd.dao.ItemDAO;
 import com.training.bd.models.Item;
+import com.training.bd.models.Item;
+import com.training.bd.models.ItemDetails;
 import com.training.bd.models.User;
 
 
@@ -23,20 +26,24 @@ import com.training.bd.models.User;
 public class ItemController {
 	ApplicationContext context ;
 	ItemDAO itemDAO ;
-	ItemJDBCTemplate itemJDBCTemplate;
+	
 		
 	public ItemController() {
 		context= new ClassPathXmlApplicationContext("spring.xml");
 		itemDAO= (ItemDAO) context.getBean("itemDAO");
-		itemJDBCTemplate = (ItemJDBCTemplate)context.getBean("itemJDBCTemplate");
 	}
-		
 	
 	@RequestMapping(value="/getAllItems", method = RequestMethod.GET)
-	public @ResponseBody List<Item> items(){
-		List<Item> flag = new ArrayList();
-		flag = itemJDBCTemplate.getItemList();		
-		return flag;
+	public @ResponseBody List<Item> items(){		
+		return itemDAO.getItemList();				
 	}	
-			
+		
+	@RequestMapping(value="/getItemDataOf",method = RequestMethod.GET)
+	public @ResponseBody ItemDetails item(@RequestParam(value="itemID", required=true) int itemID){
+		ItemDetails iDetails = new ItemDetails();
+		iDetails = itemDAO.getItemDetails(itemID);
+		
+		return iDetails;
+		//return null;
+	}
 }

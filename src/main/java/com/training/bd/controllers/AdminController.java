@@ -16,10 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.training.bd.JDBC.UserJDBCTemplate;
+
+import com.training.bd.dao.BidHistoryDAO;
+import com.training.bd.dao.ItemDAO;
 import com.training.bd.dao.ItemDAO;
 import com.training.bd.dao.UserDAO;
 import com.training.bd.models.Item;
+import com.training.bd.models.Item;
+import com.training.bd.models.ItemFromWeb;
 import com.training.bd.models.User;
 
 @Controller
@@ -27,17 +31,18 @@ import com.training.bd.models.User;
 public class AdminController {
 	ApplicationContext context ;
 	ItemDAO itemDAO ;
-		
+	BidHistoryDAO bhDAO;	
+	
 	public AdminController() {
 		context= new ClassPathXmlApplicationContext("spring.xml");
 		itemDAO= (ItemDAO) context.getBean("itemDAO");
-		
+		bhDAO= (BidHistoryDAO) context.getBean("bidHistoryDAO");
 	}
 		
-	@RequestMapping(value="addItem", method = RequestMethod.POST)
-	public @ResponseBody Item item(Item item){
-		//itemDAO.saveItem(item);					
-		return item;
+	@RequestMapping(value="addItem",consumes="application/json", method = RequestMethod.POST)
+	public @ResponseBody Item item(@RequestBody ItemFromWeb item){
+	//	itemDAO.saveItem(item);		
+		return null;
 	}
 	
 

@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.training.bd.JDBC.UserJDBCTemplate;
+
+import com.training.bd.dao.UserDAO;
 import com.training.bd.dao.UserDAO;
 import com.training.bd.models.BidPlacement;
 import com.training.bd.models.Item;
+import com.training.bd.models.LoginObject;
+import com.training.bd.models.User;
 import com.training.bd.models.User;
 
 @Controller
@@ -27,25 +30,24 @@ import com.training.bd.models.User;
 public class UserController {
 	ApplicationContext context ;
 	UserDAO userDAO ;
-	UserJDBCTemplate userJDBCTemplate;
+	
 	
 	public UserController() {
 		context= new ClassPathXmlApplicationContext("spring.xml");
 		userDAO= (UserDAO) context.getBean("userDAO");
-		userJDBCTemplate = (UserJDBCTemplate)context.getBean("userJDBCTemplate");
+		
+	}			
+ 
+	@RequestMapping(value = "/login",consumes="application/json", method = RequestMethod.POST)
+	public @ResponseBody User user(@RequestBody final LoginObject user){
+		//return user;
+		return userDAO.isUser(user.getUsername(),user.getPassword());	
+	
+	}
+	
+	@RequestMapping(value = "/register",consumes="application/json", method = RequestMethod.POST)
+	public @ResponseBody void reg(@RequestBody final User user){
+		userDAO.register(user);		
 	}
 		
-	
- 
-	@RequestMapping(value = "/login", consumes="application/json",  method = RequestMethod.POST)
-	public @ResponseBody User user(@RequestBody final User user){
-		//return user;
-		return userJDBCTemplate.isUser(user.getUsername(), user.getPassword());		
-	}
-	
-	@RequestMapping(value="/user/placeBid",consumes="application/json", method=RequestMethod.POST)
-	public @ResponseBody boolean item(@RequestBody final BidPlacement bidPlacement){
-		//return bidPlacement;
-		return userDAO.placeBid(bidPlacement);						
-	}
 }
