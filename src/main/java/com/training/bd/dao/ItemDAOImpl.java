@@ -20,8 +20,10 @@ import com.training.bd.models.User;
 import com.training.bd.models.User;
 import com.training.bd.webModels.ItemFromWeb;
 
+
 public class ItemDAOImpl implements ItemDAO{
 
+	@Autowired
 	private SessionFactory sessionFactory;
 	
 	

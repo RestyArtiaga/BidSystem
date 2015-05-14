@@ -29,8 +29,7 @@ import com.training.bd.webModels.ItemFromWeb;
 public class ItemController {
 	ApplicationContext context ;
 	ItemDAO itemDAO ;
-	
-		
+			
 	public ItemController() {
 		context= new ClassPathXmlApplicationContext("spring.xml");
 		itemDAO= (ItemDAO) context.getBean("itemDAO");
@@ -50,7 +49,14 @@ public class ItemController {
 	
 	@RequestMapping(value="/addItem",consumes="application/json", method = RequestMethod.POST)
 	public @ResponseBody Object item(@RequestBody ItemFromWeb item){
-	//	itemDAO.saveItem(item);		
+		itemDAO.saveItem(item);		
 		return item;
+	}
+	
+	@RequestMapping(value="/deleteItem",method = RequestMethod.DELETE)
+	public @ResponseBody ItemDetails itemDelete(@RequestParam(value="itemID", required=true) int itemID){
+		ItemDetails iDetails = new ItemDetails();
+		iDetails = itemDAO.getItemDetails(itemID);		
+		return iDetails;
 	}
 }

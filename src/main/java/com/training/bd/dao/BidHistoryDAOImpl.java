@@ -71,7 +71,6 @@ public class BidHistoryDAOImpl implements BidHistoryDAO {
 	}
 	
 	
-	
 /*	
 	@Override
 	public void addBidHistory(BidHistory bidHistory) {				
