@@ -1,13 +1,18 @@
 package com.training.bd.webModels;
 
 public class ItemFromWeb {
+	private int itemID;
 	private int userID;	
 	private String itemName;
 	private String itemDescription;
 	private int duration;
 	private double price;
 	
-	
+	public int getItemID() {
+		return itemID;
+	}public void setItemID(int itemID) {
+		this.itemID = itemID;
+	}
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}public void setItemDescription(String itemDescription) {

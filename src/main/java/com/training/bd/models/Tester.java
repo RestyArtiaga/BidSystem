@@ -35,14 +35,7 @@ class Tester{
 							
 		context= new ClassPathXmlApplicationContext("spring.xml");
 		ItemDAOImpl itemDAO = (ItemDAOImpl) context.getBean("itemDAO");
-		ItemFromWeb item = new ItemFromWeb();
-		item.setItemName("asdfasdfasfsadf");
-		item.setItemDescription("blkjzlxkcjviouaf");
-		item.setPrice(124124);
-		item.setUserID(1);
-		
-		
-		itemDAO.saveItem(item);
+		itemDAO.deleteItem(33);
 		
 	 } 
 

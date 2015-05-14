@@ -11,6 +11,7 @@ public interface ItemDAO {
 	public ItemDetails getItemDetails(int itemID);
 	public List<Item> getItemList();
 	public void saveItem(ItemFromWeb item);
+	public void deleteItem(int itemID);
 /*	public void saveItem(ItemFromWeb item);
 	public List<Item> getItemList();
 	public Item getItem(int itemID);*/

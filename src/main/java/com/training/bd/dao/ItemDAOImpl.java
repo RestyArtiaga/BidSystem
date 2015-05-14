@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.util.NestedServletException;
 
 import com.training.bd.models.BidHistory;
 import com.training.bd.models.Item;
@@ -78,27 +79,53 @@ public class ItemDAOImpl implements ItemDAO{
 	@Override
 	public void saveItem(ItemFromWeb item) {
 		Item itemMain = new Item();
+		itemMain.setItemID(item.getItemID());
 		itemMain.setDuration(item.getDuration());
 		itemMain.setItemName(item.getItemName());
 		itemMain.setItemDescription(item.getItemDescription());		
 		itemMain.setUser(new User());
 		itemMain.getUser().setUserID(item.getUserID());
-		BidHistory bid = new BidHistory();
 		
-		bid.setPrice(item.getPrice());
-		bid.setUserID(new User());
-		bid.getUserID().setUserID(item.getUserID());
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();		
-		session.save(itemMain);	    
+		session.saveOrUpdate(itemMain);	    
 	    tx.commit();	    	   	    
 	    tx = session.beginTransaction();
-	    bid.setItem(itemMain);
-	    session.save(bid);
-	    tx.commit();	
-	    session.close();
-	    //System.out.println(itemMain.getItemID());
+	    
+	    try{
+		    BidHistory bid = new BidHistory();		
+			bid.setPrice(item.getPrice());
+			bid.setUserID(new User());
+			bid.getUserID().setUserID(item.getUserID());
+		    bid.setItem(itemMain);
+		    session.save(bid);
+		    tx.commit();		    
+	    }catch(Exception except){
+	    	
+	    }finally{
+	    	session.close();
+	    }
 	}
+	
+	
+	
+
+	@Override
+	public void deleteItem(int itemID) {
+		Session session = this.sessionFactory.openSession();
+		Item item = new Item();
+		item.setItemID(itemID);
+		System.out.println(item.getItemID());
+		session.delete(item);
+		session.flush();
+				
+		Query query = session.createQuery("delete "+  BidHistory.class.getName() +" where itemID = :id");
+		query.setParameter("id",itemID);		 
+		int result = query.executeUpdate();
+		System.out.println(result);
+	}
+	
+	
 
 
 	

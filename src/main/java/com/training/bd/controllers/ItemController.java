@@ -54,9 +54,13 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value="/deleteItem",method = RequestMethod.DELETE)
-	public @ResponseBody ItemDetails itemDelete(@RequestParam(value="itemID", required=true) int itemID){
-		ItemDetails iDetails = new ItemDetails();
-		iDetails = itemDAO.getItemDetails(itemID);		
-		return iDetails;
+	public @ResponseBody void itemDelete(@RequestParam(value="itemID", required=true) int itemID){
+		itemDAO.deleteItem(itemID);
+	}
+	
+	@RequestMapping(value="/updateItem",consumes="application/json", method = RequestMethod.POST)
+	public @ResponseBody Object update(@RequestBody ItemFromWeb item){
+		itemDAO.saveItem(item);		
+		return item;
 	}
 }
