@@ -10,6 +10,7 @@
     
     <title>Bidding System - Login</title>
 
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/assets/images/favicon.ico">
     <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/assets/css/override.css" rel="stylesheet">
 
@@ -64,7 +65,27 @@
 
             });
 
-            
+            {
+                "item":{
+                    "itemID":4,
+                    "user":{
+                        "userID":1,
+                        "username":"wickedzick",
+                        "password":"anklebreaker",
+                        "role":{
+                            "roleID":1,
+                            "role":"admin"
+                        }},
+                        "itemName":"celpona",
+                        "itemDescription":"asbasdbasb",
+                        "duration":12,
+                        "createdAt":null},
+                        "highestBid":{
+                            "bidID":4,
+                            "userID":{
+                                "userID":1,
+                                "username":"wickedzick",
+                                "password":"anklebreaker","role":{"roleID":1,"role":"admin"}},"price":10001.0,"createdAt":null}}
 
     </script>
   </body>

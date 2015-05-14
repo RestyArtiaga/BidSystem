@@ -10,7 +10,8 @@
     
     <title>Bidding System - Admin</title>
 
-    <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/assets/images/favicon.ico">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/assets/css/override.css" rel="stylesheet">
 
   </head>
@@ -30,7 +31,7 @@
                         <label for="currentPrice" class="sr-only">Starting Bid</label>
                     <input type="text" id="currentPrice" class="form-control" placeholder="Starting Bid" required="">
                 </form>
-            <button class="btn btn-lg btn-primary btn-block" id="gogo">Add Item</button>
+            <button class="btn btn-lg btn-primary btn-block" id="addItem">Add Item</button>
           </div>
         </div>
         <div class="panel panel-primary col-md-12">
@@ -38,15 +39,11 @@
                 <table id="example" class="table table-hover" cellspacing="0" width="100%">
                 <thead>
                   <tr>
-                    <th>itemID</th>
                     <th>itemName</th>
-                    <th>userID</th>
                     <th>itemDescription</th>
                     <th>duration</th>
                     <th>currentPrice</th>
-                    <th>createdAt</th>
-                    <th>highestBidder</th>
-                    <th>highestBidderID</th>
+                    <th>action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -55,36 +52,97 @@
               </table>
           </div>
         </div>
-
-
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Are you sure you want to delete <b ><span id="nameOfItem"></span></b> item?</h4>
+                <input type="hidden" id="idOfItem">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="deleteItem">Yes</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Update <b ><span id="nameOfItem"></span></b> item?</h4>
+                <input type="hidden" id="idOfItem">
+              </div>
+              <div class="modal-body">
+                    <div class="panel panel-primary col-md-12">
+                        <div class="panel-body">
+                            <form >
+                                <h2 class="form-signin-heading">Update Item</h2>
+                                    <label for="itemName" class="sr-only">Item Name</label>
+                                <input type="text" id="itemName" class="form-control" placeholder="Item Name" required="" autofocus="">
+                                    <label for="itemDescription" class="sr-only">Item Description</label>
+                                <input type="text" id="itemDescription" class="form-control" placeholder="Item Description" required="">
+                                    <label for="duration" class="sr-only">Bid Duration</label>
+                                <input type="text" id="duration" class="form-control" placeholder="Bid Duration(hours)" required="">
+                                    <label for="currentPrice" class="sr-only">Starting Bid</label>
+                                <input type="text" id="currentPrice" class="form-control" placeholder="Starting Bid" required="">
+                            </form>
+                        <button class="btn btn-lg btn-primary btn-block" id="addItem">Add Item</button>
+                      </div>
+                    </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="updateItem">Yes</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div> 
     
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
     <script>
-
         $(document).ready(function() {
-            $.get("getAllItems", function(data, status){
+            loadItems();
+        });
+
+        $('#exampleModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget)
+          var itemID = button.data('whatever')
+          var itemName = button.data('whatever2')
+          $("#idOfItem").val(itemID);
+          $("#nameOfItem").html(itemName);
+          console.log(itemName)
+
+        })
+
+        function loadItems() {
+            $.get("getAllItems", function(data){
                 //alert(data[0]["itemName"]);
                 var tableData="";
                 for(var i=0;i<data.length;i++){
-                    tableData+=("<tr><td>"+data[i]["itemID"]+"</td>");
-                    tableData+=("<td>"+data[i]["itemName"]+"</td>");
-                    tableData+=("<td>"+data[i]["userID"]+"</td>");
+                    tableData+=("<tr><td>"+data[i]["itemName"]+"</td>");
                     tableData+=("<td>"+data[i]["itemDescription"]+"</td>");
                     tableData+=("<td>"+data[i]["duration"]+"</td>");
-                    tableData+=("<td>"+data[i]["currentPrice"]+"</td>");
                     tableData+=("<td>"+data[i]["createdAt"]+"</td>");
-                    tableData+=("<td>"+data[i]["highestBidder"]+"</td>");
-                    tableData+=("<td>"+data[i]["highestBidderID"]+"</td>");
-                    tableData+=("<td><a class='btn btn-default' href='user/placeBid' role='button'>BID</a></td></tr>");
+                    tableData+=("<td class='text-center'>"
+                                    +"<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#updateModal' data-whatever='"+data[i]["itemID"]+"' data-whatever2='"+data[i]["itemName"]+"' ><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></button> "
+                                    +"<button class='btn btn-danger btn-xs' data-toggle='modal' data-target='#exampleModal' data-whatever='"+data[i]["itemID"]+"' data-whatever2='"+data[i]["itemName"]+"' ><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>"
+                                +"</td></tr>");
                 }
+
                 $("tbody").html(tableData);
             });
-        });
-            $("button").click(
+        }
+            $("#addItem").click(
 
                 function(){
                     var arr = {
@@ -92,25 +150,43 @@
                         "itemName": $("#itemName").val(), 
                         "itemDescription": $("#itemDescription").val(),
                         "duration": $("#duration").val(),
-                        "currentPrice": $("#currentPrice").val()
+                        "price": $("#currentPrice").val()
                         }; 
 
                     $.ajax({
-                        url: 'addItem',
+                        url: 'addItem' ,
                         type: 'POST',
                         data: JSON.stringify(arr),
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json'
                     }).done(function(data){
-
+                        loadItems()
+                        alert("Successfully Added Item ")
                     }).fail(function(data){
-                        alert("fail miserably"+data);
-                });
+                        alert("Adding Failed:"+data);
+                    });
 
             });
 
-            
+            $("#deleteItem").click(function(){
+                    // $.get('deleteItem?itemID='+$("#idOfItem").val(), function(data, status){
+                           
+                    //         loadItems()
 
+                    //         $("#exampleModal").modal('hide');
+                    // });
+                     $.ajax({
+                        url: 'deleteItem?itemID='+$("#idOfItem").val(),
+                        type: 'DELETE'
+                    }).done(function(data){
+                        //alert("success"+data)
+                        loadItems();
+                        $("#exampleModal").modal('hide');
+                    }).fail(function(data){
+                        alert("fail miserably"+data);
+                    });
+               
+            });
     </script>
   </body>
 </html>

@@ -10,6 +10,7 @@
     
     <title>Bidding System - Register</title>
 
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/assets/images/favicon.ico">
     <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/assets/css/override.css" rel="stylesheet">
 
@@ -56,14 +57,13 @@
                                     dataType: 'json'
                                 }).done(function(data){
                                     alert("You have successfully registered!");
-
-                                window.location.href = "formLogin";
+                                    window.location.href = "formLogin";
                                 }).fail(function(data){
                                     alert("Failed"+data);
                                 });
                           }
                           else{
-                            alert("Make sure you typed the the correct password.");
+                            alert("Make sure you typed the matching passwords.");
                           }
                         }
                         else{
