@@ -13,6 +13,7 @@
         <property name="username" value="root" />
         <property name="password" value="" />
     </bean>
+ 	
  
 <!-- Hibernate 3 Annotation SessionFactory Bean definition-->
     <bean id="hibernate3AnnotatedSessionFactory"
@@ -34,7 +35,10 @@
             </props>
         </property>
     </bean>
-     
+     <tx:annotation-driven />
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean> 
     <bean id="userDAO" class="com.training.bd.dao.UserDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
