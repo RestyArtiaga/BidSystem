@@ -17,9 +17,13 @@ import javax.persistence.Table;
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name="item")
+@DynamicUpdate
+@DynamicInsert
 public class Item {
 
 	@Id
@@ -42,7 +46,7 @@ public class Item {
 	private int duration;
 	
 	@Column(name="createdAt")
-	private transient Date createdAt;
+	private  String createdAt;
 	
 
 	@OneToMany(mappedBy="bidID", fetch = FetchType.EAGER, cascade = CascadeType.ALL)		
@@ -54,7 +58,7 @@ public class Item {
 	}public void setBids(List<BidHistory> bids) {
 		this.bids = bids;
 	}
-	public Date getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	}public int getDuration() {
 		return duration;
@@ -66,7 +70,7 @@ public class Item {
 		return itemName;
 	}public User getUser() {
 		return user;
-	}public void setCreatedAt(Date createdAt) {
+	}public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}public void setDuration(int duration) {
 		this.duration = duration;

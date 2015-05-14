@@ -83,6 +83,7 @@ public class ItemDAOImpl implements ItemDAO{
 		itemMain.setDuration(item.getDuration());
 		itemMain.setItemName(item.getItemName());
 		itemMain.setItemDescription(item.getItemDescription());		
+		itemMain.setCreatedAt(null);
 		itemMain.setUser(new User());
 		itemMain.getUser().setUserID(item.getUserID());
 		

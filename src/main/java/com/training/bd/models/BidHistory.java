@@ -12,9 +12,13 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name="bidHistory")
+@DynamicUpdate
+@DynamicInsert
 public class BidHistory {
 	
 	
@@ -36,12 +40,13 @@ public class BidHistory {
 	
 	@Column(name="price")
 	private double price;
-			
-	private transient Date createdAt;
+		
+	@Column(name="createdAt")
+	private  String createdAt;
 	
-	public Date getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
-	}public void setCreatedAt(Date createdAt) {
+	}public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
 	
