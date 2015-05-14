@@ -84,21 +84,20 @@
                             <form >
                                 <h2 class="form-signin-heading">Update Item</h2>
                                     <label for="itemName" class="sr-only">Item Name</label>
-                                <input type="text" id="itemName" class="form-control" placeholder="Item Name" required="" autofocus="">
+                                <input type="text" id="uitemName" class="form-control" placeholder="Item Name" required="" autofocus="">
                                     <label for="itemDescription" class="sr-only">Item Description</label>
-                                <input type="text" id="itemDescription" class="form-control" placeholder="Item Description" required="">
+                                <input type="text" id="uitemDescription" class="form-control" placeholder="Item Description" required="">
                                     <label for="duration" class="sr-only">Bid Duration</label>
-                                <input type="text" id="duration" class="form-control" placeholder="Bid Duration(hours)" required="">
+                                <input type="text" id="uduration" class="form-control" placeholder="Bid Duration(hours)" required="">
                                     <label for="currentPrice" class="sr-only">Starting Bid</label>
-                                <input type="text" id="currentPrice" class="form-control" placeholder="Starting Bid" required="">
+                                <input type="text" id="ucurrentPrice" class="form-control" placeholder="Starting Bid" required="">
                             </form>
-                        <button class="btn btn-lg btn-primary btn-block" id="addItem">Add Item</button>
                       </div>
                     </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary" id="updateItem">Yes</button>
+                <button type="button" class="btn btn-primary" id="updateItem">UPDATE</button>
               </div>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
@@ -114,15 +113,7 @@
             loadItems();
         });
 
-        $('#exampleModal').on('show.bs.modal', function (event) {
-          var button = $(event.relatedTarget)
-          var itemID = button.data('whatever')
-          var itemName = button.data('whatever2')
-          $("#idOfItem").val(itemID);
-          $("#nameOfItem").html(itemName);
-          console.log(itemName)
-
-        })
+       
 
         function loadItems() {
             $.get("getAllItems", function(data){
@@ -134,7 +125,7 @@
                     tableData+=("<td>"+data[i]["duration"]+"</td>");
                     tableData+=("<td>"+data[i]["createdAt"]+"</td>");
                     tableData+=("<td class='text-center'>"
-                                    +"<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#updateModal' data-whatever='"+data[i]["itemID"]+"' data-whatever2='"+data[i]["itemName"]+"' ><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></button> "
+                                    +"<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#updateModal' data-whatever='"+data[i]["itemID"]+"' ><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></button> "
                                     +"<button class='btn btn-danger btn-xs' data-toggle='modal' data-target='#exampleModal' data-whatever='"+data[i]["itemID"]+"' data-whatever2='"+data[i]["itemName"]+"' ><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>"
                                 +"</td></tr>");
                 }
@@ -142,6 +133,29 @@
                 $("tbody").html(tableData);
             });
         }
+
+            $('#updateModal').on('show.bs.modal', function (event) {
+              var button = $(event.relatedTarget);
+              var itemID = button.data('whatever');
+              
+            
+
+              $.get("getItemDataOf?itemID="+itemID, function(data, status){
+
+                  selectedID=data["item"]["itemID"];
+
+                  $("#uitemName").val("<b>Item ID</b>: "+data["item"]["itemName"]+"<br>");
+                  $("#uitemDescription").val("<b>Item Name</b>: "+data["item"]["itemDescription"]+"<br>");
+                  $("#uduration").val("<b>Posted on</b>: "+data["item"]["duration"]+"<br>");
+                  $("#ucurrentPrice").val("<b>Description</b>: "+data["highestBid"]["price"]+"<br>");
+
+
+                  $("#pot").attr("min", data["highestBid"]["price"] );
+                  $("#pot").attr("value", data["highestBid"]["price"] );
+                  //$("#modalBody").append("asd");
+                  console.log(data["item"]["itemName"])
+              });
+            })
             $("#addItem").click(
 
                 function(){
@@ -166,6 +180,26 @@
                         alert("Adding Failed:"+data);
                     });
 
+            });
+
+            $("#deleteItem").click(function(){
+                    // $.get('deleteItem?itemID='+$("#idOfItem").val(), function(data, status){
+                           
+                    //         loadItems()
+
+                    //         $("#exampleModal").modal('hide');
+                    // });
+                     $.ajax({
+                        url: 'deleteItem?itemID='+$("#idOfItem").val(),
+                        type: 'DELETE'
+                    }).done(function(data){
+                        //alert("success"+data)
+                        loadItems();
+                        $("#exampleModal").modal('hide');
+                    }).fail(function(data){
+                        alert("fail miserably"+data);
+                    });
+               
             });
 
             $("#deleteItem").click(function(){
