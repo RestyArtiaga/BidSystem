@@ -10,18 +10,21 @@ import org.hibernate.Transaction;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.NestedServletException;
 
 import com.training.bd.models.BidHistory;
 import com.training.bd.models.Item;
 import com.training.bd.models.Item;
-import com.training.bd.models.ItemDetails;
 import com.training.bd.models.Role;
 import com.training.bd.models.User;
 import com.training.bd.models.User;
+import com.training.bd.webModels.ItemDetails;
 import com.training.bd.webModels.ItemFromWeb;
 
-
+@Repository
+@Transactional
 public class ItemDAOImpl implements ItemDAO{
 
 	@Autowired
@@ -71,8 +74,7 @@ public class ItemDAOImpl implements ItemDAO{
 		Session session = this.sessionFactory.openSession();
 		Query query = session.createQuery("from " + Item.class.getName());				
 		List<Item> list = (List<Item>) query.list();		
-		session.close();
-	
+		session.close();	
 		return list;
 	}
 

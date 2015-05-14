@@ -9,7 +9,5 @@ import com.training.bd.webModels.ItemFromWeb;
 public interface BidHistoryDAO {
 	public boolean placeBid(BidFromWeb bidPlacement);
 	public List<BidHistory> getBidHistoryOf(int itemID);
-/*	public void addBidHistory(BidHistory bidHistory);
-	public boolean placeBid(BidPlacement bidPlacement);
-	public void setStartingPrice(ItemFromWeb item);*/
+
 }

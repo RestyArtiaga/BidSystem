@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
+
 import com.training.bd.dao.ItemDAO;
 import com.training.bd.dao.ItemDAO;
 import com.training.bd.models.Item;
 import com.training.bd.models.Item;
-import com.training.bd.models.ItemDetails;
 import com.training.bd.models.User;
+import com.training.bd.webModels.ItemDetails;
 import com.training.bd.webModels.ItemFromWeb;
 
 

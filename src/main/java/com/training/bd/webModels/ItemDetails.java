@@ -1,4 +1,7 @@
-package com.training.bd.models;
+package com.training.bd.webModels;
+
+import com.training.bd.models.BidHistory;
+import com.training.bd.models.Item;
 
 public class ItemDetails {
 	private Item item;

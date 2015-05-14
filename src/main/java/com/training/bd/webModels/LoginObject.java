@@ -1,4 +1,4 @@
-package com.training.bd.models;
+package com.training.bd.webModels;
 
 public class LoginObject {
 	private String username;

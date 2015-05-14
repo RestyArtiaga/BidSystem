@@ -2,7 +2,7 @@ package com.training.bd.dao;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
+
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -10,20 +10,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-
-import com.training.bd.models.Item;
-import com.training.bd.models.Item;
-import com.training.bd.models.LoginObject;
 import com.training.bd.models.Role;
 import com.training.bd.models.User;
-import com.training.bd.models.User;
 import com.training.bd.webModels.UserFromWeb;
+
 
 @Repository
 @Transactional
 public class UserDAOImpl implements UserDAO{
-	//@Autowired
+	
+	
+	@Autowired
 	private SessionFactory sessionFactory;
 	
 	
