@@ -19,7 +19,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name="bidHistory")
 @DynamicUpdate
 @DynamicInsert
-public class BidHistory {
+public class Bid {
 	
 	
 	@Id

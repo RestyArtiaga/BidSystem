@@ -2,6 +2,7 @@ package com.training.bd.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -22,45 +23,51 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
+
+
+
 import com.training.bd.dao.UserDAO;
 import com.training.bd.dao.UserDAO;
 import com.training.bd.models.Item;
 import com.training.bd.models.Role;
 import com.training.bd.models.User;
 import com.training.bd.models.User;
+import com.training.bd.services.UserService;
+import com.training.bd.services.UserServiceImpl;
 import com.training.bd.webModels.ItemDetails;
 import com.training.bd.webModels.LoginObject;
 import com.training.bd.webModels.UserFromWeb;
 
 @Controller
-
 public class UserController {
-	ApplicationContext context ;
-	UserDAO userDAO ;
 	
 	
-	public UserController() {
-		context= new ClassPathXmlApplicationContext("spring.xml");
-		userDAO= (UserDAO) context.getBean("userDAO");
+	@Autowired
+	UserService userService;
+	
 		
-	}			
  
-
+	
 	@RequestMapping(value="/isUsernameExisting",method = RequestMethod.GET)
 	public @ResponseBody boolean item(@RequestParam(value="username", required=true) String username){				
-		return userDAO.usernameExists(username);		
+		return userService.usernameExists(username);
 	}
+	
+	
 	
 	@RequestMapping(value = "/login",consumes="application/json", method = RequestMethod.POST)
 	public @ResponseBody User user(@RequestBody final UserFromWeb user){		
-		return userDAO.isUser(user.getUsername(),user.getPassword());		
+		return userService.isUser(user.getUsername(),user.getPassword());
 	}
 	
+	
+	
 	@RequestMapping(value = "/register",consumes="application/json", method = RequestMethod.POST)
-	public @ResponseBody UserFromWeb reg(@RequestBody final UserFromWeb user){
-		userDAO.register(user);	
-		return user;
+	public @ResponseBody User reg(@RequestBody final UserFromWeb user){
+		return userService.register(user);		
 	}
+	
 	
 	
 		

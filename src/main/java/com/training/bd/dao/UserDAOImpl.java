@@ -18,7 +18,6 @@ import com.training.bd.webModels.UserFromWeb;
 
 
 @Repository
-@Transactional
 public class UserDAOImpl implements UserDAO{
 	
 	
@@ -26,13 +25,11 @@ public class UserDAOImpl implements UserDAO{
 	private SessionFactory sessionFactory;
 	
 	
-	public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+	
 	
 
 	@Override
-	public User isUser(String username,String password) {
+	public User isUser(String username,String password) {		
 		User flag = new User();
 		Session session = this.sessionFactory.openSession();
 		Query query = session.createQuery("from User where username = :un and password = :pass");
@@ -50,17 +47,12 @@ public class UserDAOImpl implements UserDAO{
 	
 
 	@Override
-	public void register(UserFromWeb user) {
-		User userMain = new User();
-		userMain.setUsername(user.getUsername());
-		userMain.setPassword(user.getPassword());
-		userMain.setRoles(new Role());
-		userMain.getRole().setRoleID(user.getRoleID());
+	public User register(User user) {				
 		Session session = this.sessionFactory.openSession();
-		 Transaction tx = session.beginTransaction();
-	        session.saveOrUpdate(userMain);	       
-	        tx.commit();
-	        session.close();
+	    session.saveOrUpdate(user);	  
+	    session.flush();
+	    session.close();
+	    return user;
 	}
 
 

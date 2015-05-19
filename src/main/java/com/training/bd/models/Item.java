@@ -45,17 +45,16 @@ public class Item {
 	@Column(name="duration")
 	private int duration;
 	
-	@Column(name="createdAt")
+	@Column(name="createdAt",updatable=false)
 	private  String createdAt;
 	
-
 	@OneToMany(mappedBy="bidID", fetch = FetchType.EAGER, cascade = CascadeType.ALL)		
 	@JsonIgnore
-	private List<BidHistory> bids;
+	private List<Bid> bids;
 	
-	public List<BidHistory> getBids() {
+	public List<Bid> getBids() {
 		return bids;
-	}public void setBids(List<BidHistory> bids) {
+	}public void setBids(List<Bid> bids) {
 		this.bids = bids;
 	}
 	public String getCreatedAt() {

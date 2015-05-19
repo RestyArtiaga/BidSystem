@@ -3,6 +3,8 @@ package com.training.bd.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.TransactionManager;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.NestedServletException;
 
-import com.training.bd.models.BidHistory;
+import com.training.bd.models.Bid;
 import com.training.bd.models.Item;
 import com.training.bd.models.Item;
 import com.training.bd.models.Role;
@@ -24,16 +26,12 @@ import com.training.bd.webModels.ItemDetails;
 import com.training.bd.webModels.ItemFromWeb;
 
 @Repository
-@Transactional
 public class ItemDAOImpl implements ItemDAO{
 
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	
-	public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+
 	
 	@Override
 	public ItemDetails getItemDetails(int itemID) {
@@ -53,14 +51,14 @@ public class ItemDAOImpl implements ItemDAO{
 		return flag;
 	}
 	
-	public BidHistory getHighestBid(int itemID){
-		BidHistory flag = new BidHistory();
+	public Bid getHighestBid(int itemID){
+		Bid flag = new Bid();
 		
 		Session session = this.sessionFactory.openSession();
-		Query query = session.createQuery("from " + BidHistory.class.getName() +" where itemID = :id order by price desc ");		
+		Query query = session.createQuery("from " + Bid.class.getName() +" where itemID = :id order by price desc ");		
 		query.setParameter("id", itemID);
 		query.setMaxResults(1);
-		List<BidHistory> list = (List<BidHistory>) query.list();	
+		List<Bid> list = (List<Bid>) query.list();	
 		session.close();
 		
 		if(list.size()>0){
@@ -79,35 +77,10 @@ public class ItemDAOImpl implements ItemDAO{
 	}
 
 	@Override
-	public void saveItem(ItemFromWeb item) {
-		Item itemMain = new Item();
-		itemMain.setItemID(item.getItemID());
-		itemMain.setDuration(item.getDuration());
-		itemMain.setItemName(item.getItemName());
-		itemMain.setItemDescription(item.getItemDescription());		
-		itemMain.setCreatedAt(null);
-		itemMain.setUser(new User());
-		itemMain.getUser().setUserID(item.getUserID());
-		
-		Session session = this.sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();		
-		session.saveOrUpdate(itemMain);	    
-	    tx.commit();	    	   	    
-	    tx = session.beginTransaction();
-	    
-	    try{
-		    BidHistory bid = new BidHistory();		
-			bid.setPrice(item.getPrice());
-			bid.setUserID(new User());
-			bid.getUserID().setUserID(item.getUserID());
-		    bid.setItem(itemMain);
-		    session.save(bid);
-		    tx.commit();		    
-	    }catch(Exception except){
-	    	
-	    }finally{
-	    	session.close();
-	    }
+	public void saveItem(Item item) {				
+		Session session = this.sessionFactory.openSession();			
+		session.save(item);	    			    
+	    session.close();	    
 	}
 	
 	
@@ -118,20 +91,23 @@ public class ItemDAOImpl implements ItemDAO{
 		Session session = this.sessionFactory.openSession();
 		Item item = new Item();
 		item.setItemID(itemID);
-		System.out.println(item.getItemID());
 		session.delete(item);
 		session.flush();
 				
-		Query query = session.createQuery("delete "+  BidHistory.class.getName() +" where itemID = :id");
+		Query query = session.createQuery("delete "+  Bid.class.getName() +" where itemID = :id");
 		query.setParameter("id",itemID);		 
 		int result = query.executeUpdate();
-		System.out.println(result);
+		System.out.println(result);				
 	}
-	
-	
-
 
 	
-	
+	@Override
+	public void updateItem(Item item) {
+		Session session = this.sessionFactory.openSession();
+		session.update(item);
+		session.flush();
+	    session.close();		
+	}
+				
 }
 

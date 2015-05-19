@@ -23,8 +23,7 @@
         <label for="inputEmail" class="sr-only">Username</label>
         <input type="text" id="username" class="form-control" placeholder="Username" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="password" class="form-control" placeholder="Password" required="">
-        
+        <input type="password" id="password" class="form-control" placeholder="Password" required="">        
         <div class="checkbox">
           
             <a type="checkbox" href="<c:url value='/formRegister' />" >Register</a>
@@ -64,29 +63,7 @@
                 });
 
             });
-
-            {
-                "item":{
-                    "itemID":4,
-                    "user":{
-                        "userID":1,
-                        "username":"wickedzick",
-                        "password":"anklebreaker",
-                        "role":{
-                            "roleID":1,
-                            "role":"admin"
-                        }},
-                        "itemName":"celpona",
-                        "itemDescription":"asbasdbasb",
-                        "duration":12,
-                        "createdAt":null},
-                        "highestBid":{
-                            "bidID":4,
-                            "userID":{
-                                "userID":1,
-                                "username":"wickedzick",
-                                "password":"anklebreaker","role":{"roleID":1,"role":"admin"}},"price":10001.0,"createdAt":null}}
-
+           
     </script>
   </body>
 </html>
