@@ -10,6 +10,7 @@ import com.training.bd.models.Bid;
 import com.training.bd.models.Item;
 import com.training.bd.models.User;
 import com.training.bd.webModels.BidFromWeb;
+import com.training.bd.webModels.StatusObject;
 
 @Repository
 public class BidServiceImpl implements BidService {
@@ -18,8 +19,8 @@ public class BidServiceImpl implements BidService {
 	BidDAO bidDAOImpl;
 	
 	@Override
-	public boolean placeBid(BidFromWeb bidPlacement) {
-		boolean flag = false;
+	public StatusObject placeBid(BidFromWeb bidPlacement) {
+		StatusObject flag = new StatusObject();
 		if(bidDAOImpl.getHighestBid(bidPlacement.getItemID())<bidPlacement.getPrice()){
 			Bid bh = new Bid();
 			Item item = new Item();
@@ -30,8 +31,9 @@ public class BidServiceImpl implements BidService {
 			bh.setUserID(user);
 			bh.setPrice(bidPlacement.getPrice());
 			bidDAOImpl.addBidHistory(bh);
-			flag = true;
-		}
+			flag.setStatus(true);
+		}else
+			flag.setStatus(false);
 				
 		return flag;
 	}

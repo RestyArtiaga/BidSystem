@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.training.bd.services.BidService;
 import com.training.bd.webModels.BidFromWeb;
+import com.training.bd.webModels.StatusObject;
 
 @Controller
 public class BidController {
@@ -18,7 +19,7 @@ public class BidController {
 	
 
 	@RequestMapping(value="/placeBid",consumes="application/json", method = RequestMethod.POST)
-	public @ResponseBody boolean placeBid(@RequestBody BidFromWeb bid){		
+	public @ResponseBody StatusObject placeBid(@RequestBody BidFromWeb bid){		
 		return bidServiceImpl.placeBid(bid);
 	}
 	

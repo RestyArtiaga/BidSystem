@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.training.bd.models.User;
 import com.training.bd.services.UserService;
+import com.training.bd.webModels.StatusObject;
 import com.training.bd.webModels.UserFromWeb;
 
 @Controller
@@ -23,7 +24,7 @@ public class UserController {
  
 	
 	@RequestMapping(value="/isUsernameExisting",method = RequestMethod.GET)
-	public @ResponseBody boolean item(@RequestParam(value="username", required=true) String username){				
+	public @ResponseBody StatusObject item(@RequestParam(value="username", required=true) String username){				
 		return userService.usernameExists(username);
 	}
 	

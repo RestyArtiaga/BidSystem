@@ -20,10 +20,8 @@ public class BidDAOImpl implements BidDAO {
 
 	@Override
 	public void addBidHistory(Bid bidHistory) {				
-		Session session = this.sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-	    session.saveOrUpdate(bidHistory);
-	    tx.commit();
+		Session session = this.sessionFactory.openSession();		
+	    session.saveOrUpdate(bidHistory);	    
 	    session.close();
 	}
 	

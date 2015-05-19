@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.training.bd.dao.UserDAO;
 import com.training.bd.models.Role;
 import com.training.bd.models.User;
+import com.training.bd.webModels.StatusObject;
 import com.training.bd.webModels.UserFromWeb;
 
 @Service
@@ -17,10 +18,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired	
 	public UserDAO userDAOImpl;
 			
-	public void setUserDAO(UserDAO userDAOImpl) {
-		this.userDAOImpl = userDAOImpl;
-	}
-		
+
 	@Override
 	public User isUser(String username,String password) {			
 		return userDAOImpl.isUser(username, password);
@@ -39,8 +37,10 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public boolean usernameExists(String username) {
-		return userDAOImpl.usernameExists(username);
+	public StatusObject usernameExists(String username) {
+		StatusObject flag = new StatusObject();
+		flag.setStatus(userDAOImpl.usernameExists(username));
+		return flag;
 	}
 	
 }
