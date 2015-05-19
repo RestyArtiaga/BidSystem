@@ -30,7 +30,7 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "/login",consumes="application/json", method = RequestMethod.POST)
-	public @ResponseBody User user(@RequestBody final UserFromWeb user){		
+	public @ResponseBody User login(@RequestBody final UserFromWeb user){		
 		return userService.isUser(user.getUsername(),user.getPassword());
 	}
 	

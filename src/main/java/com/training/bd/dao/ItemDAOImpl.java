@@ -83,12 +83,7 @@ public class ItemDAOImpl implements ItemDAO{
 		Item item = new Item();
 		item.setItemID(itemID);
 		session.delete(item);
-		session.flush();
-				
-		Query query = session.createQuery("delete "+  Bid.class.getName() +" where itemID = :id");
-		query.setParameter("id",itemID);		 
-		int result = query.executeUpdate();
-		System.out.println(result);				
+		session.flush();					
 	}
 
 	

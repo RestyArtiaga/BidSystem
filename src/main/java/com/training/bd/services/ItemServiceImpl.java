@@ -57,6 +57,7 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public void deleteItem(int itemID) {
 		itemDAOImpl.deleteItem(itemID);
+		bidDAOImpl.deleteBidHistoryOn(itemID);
 	}
 
 	@Override
