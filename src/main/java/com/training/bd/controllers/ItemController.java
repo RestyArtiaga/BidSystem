@@ -1,30 +1,16 @@
 package com.training.bd.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
-
-
-
-
-import com.training.bd.dao.ItemDAO;
-import com.training.bd.dao.ItemDAO;
 import com.training.bd.models.Item;
-import com.training.bd.models.Item;
-import com.training.bd.models.User;
 import com.training.bd.services.ItemService;
 import com.training.bd.webModels.ItemDetails;
 import com.training.bd.webModels.ItemFromWeb;

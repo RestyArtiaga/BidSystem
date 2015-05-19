@@ -2,19 +2,13 @@ package com.training.bd.dao;
 
 import java.util.List;
 
-
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.training.bd.models.Role;
 import com.training.bd.models.User;
-import com.training.bd.webModels.UserFromWeb;
 
 
 @Repository
@@ -29,6 +23,7 @@ public class UserDAOImpl implements UserDAO{
 	
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public User isUser(String username,String password) {		
 		User flag = new User();
 		Session session = this.sessionFactory.openSession();
@@ -57,6 +52,7 @@ public class UserDAOImpl implements UserDAO{
 
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public boolean usernameExists(String username) {
 		boolean flag = false;
 		Session session = this.sessionFactory.openSession();

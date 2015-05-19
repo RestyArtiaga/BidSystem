@@ -8,13 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.training.bd.models.Bid;
-import com.training.bd.models.Item;
-import com.training.bd.models.User;
-import com.training.bd.webModels.BidFromWeb;
-import com.training.bd.webModels.ItemFromWeb;
 
 @Repository
 public class BidDAOImpl implements BidDAO {
@@ -34,6 +29,7 @@ public class BidDAOImpl implements BidDAO {
 	
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public double getHighestBid(int itemID){
 		double flag = 0;		
 		Session session = this.sessionFactory.openSession();
@@ -48,6 +44,7 @@ public class BidDAOImpl implements BidDAO {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Bid> getBidHistoryOf(int itemID) {
 		 Session session = this.sessionFactory.openSession(); 		   
 		 List<Bid> list =(List<Bid>) session.createCriteria(Bid.class).list();  		   
@@ -64,6 +61,7 @@ public class BidDAOImpl implements BidDAO {
 
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Integer> getAllBiddersOn(int itemID) {
 			
 		Session session = this.sessionFactory.openSession();

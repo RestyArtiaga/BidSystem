@@ -52,11 +52,11 @@
     </div><!-- /container -->
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" language="javascript" class="init">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" class="init">
       $(document).ready(function() {
            $.get("getAllItems", function(data, status){
               //alert(data[0]["itemName"]);	

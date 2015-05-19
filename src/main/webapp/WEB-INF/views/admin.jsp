@@ -23,20 +23,20 @@
                 <form >
                     <h2 class="form-signin-heading">Add Item</h2>
                         <label for="itemName" class="sr-only">Item Name</label>
-                    <input type="text" id="itemName" class="form-control" placeholder="Item Name" required="" autofocus="">
+                    <input type="text" id="itemName" class="form-control" placeholder="Item Name" required  autofocus >
                         <label for="itemDescription" class="sr-only">Item Description</label>
-                    <input type="text" id="itemDescription" class="form-control" placeholder="Item Description" required="">
+                    <input type="text" id="itemDescription" class="form-control" placeholder="Item Description" required >
                         <label for="duration" class="sr-only">Bid Duration</label>
-                    <input type="text" id="duration" class="form-control" placeholder="Bid Duration(hours)" required="">
+                    <input type="text" id="duration" class="form-control" placeholder="Bid Duration(hours)" required>
                         <label for="currentPrice" class="sr-only">Starting Bid</label>
-                    <input type="text" id="currentPrice" class="form-control" placeholder="Starting Bid" required="">
+                    <input type="text" id="currentPrice" class="form-control" placeholder="Starting Bid" required>
                 </form>
             <button class="btn btn-lg btn-primary btn-block" id="addItem">Add Item</button>
           </div>
         </div>
         <div class="panel panel-primary col-md-12">
             <div class="panel-body">
-                <table id="example" class="table table-hover" cellspacing="0" width="100%">
+                <table id="example" class="table table-hover" >
                 <thead>
                   <tr>
                     <th>itemName</th>
@@ -52,23 +52,23 @@
               </table>
           </div>
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         
-        <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Are you sure you want to delete <b ><span id="nameOfItem"></span></b> item?</h4>
-                <input type="hidden" id="idOfItem">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary" id="deleteItem">Yes</button>
-              </div>
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Are you sure you want to delete <b ><span id="nameOfItem"></span></b> item?</h4>
+              <input type="hidden" id="idOfItem">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-primary" id="deleteItem">Yes</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         
         <div class="modal-dialog">
@@ -84,13 +84,13 @@
                             <form >
                                 <h2 class="form-signin-heading">Update Item</h2>
                                     <label for="itemName" class="sr-only">Item Name</label>
-                                <input type="text" id="uitemName" class="form-control" placeholder="Item Name" required="" autofocus="">
+                                <input type="text" id="uitemName" class="form-control" placeholder="Item Name" required autofocus >
                                     <label for="itemDescription" class="sr-only">Item Description</label>
-                                <input type="text" id="uitemDescription" class="form-control" placeholder="Item Description" required="">
+                                <input type="text" id="uitemDescription" class="form-control" placeholder="Item Description" required >
                                     <label for="duration" class="sr-only">Bid Duration</label>
-                                <input type="text" id="uduration" class="form-control" placeholder="Bid Duration(hours)" required="">
+                                <input type="text" id="uduration" class="form-control" placeholder="Bid Duration(hours)" required >
                                     <label for="currentPrice" class="sr-only">Starting Bid</label>
-                                <input type="text" id="ucurrentPrice" class="form-control" placeholder="Starting Bid" required="">
+                                <input type="text" id="ucurrentPrice" class="form-control" placeholder="Starting Bid" required >
                             </form>
                       </div>
                     </div>
@@ -102,7 +102,6 @@
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-    </div> 
     
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.js"></script>

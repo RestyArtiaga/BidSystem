@@ -1,42 +1,15 @@
 package com.training.bd.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-
-
-
-
-
-
-
-
-
-
-import com.training.bd.dao.UserDAO;
-import com.training.bd.dao.UserDAO;
-import com.training.bd.models.Item;
-import com.training.bd.models.Role;
-import com.training.bd.models.User;
 import com.training.bd.models.User;
 import com.training.bd.services.UserService;
-import com.training.bd.services.UserServiceImpl;
-import com.training.bd.webModels.ItemDetails;
-import com.training.bd.webModels.LoginObject;
 import com.training.bd.webModels.UserFromWeb;
 
 @Controller

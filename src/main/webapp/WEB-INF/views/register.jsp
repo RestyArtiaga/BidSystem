@@ -21,7 +21,7 @@
       <form>
         <h2 class="form-signin-heading">Register New User</h2>
         <label for="inputEmail" class="sr-only">Username</label>
-        <input type="text" id="username" class="form-control" placeholder="Username" required="" autofocus="">
+        <input type="text" id="username" class="form-control" placeholder="Username" required autofocus >
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="password" class="form-control" placeholder="Password" required>
         <label for="inputPassword2" class="sr-only">Password</label>
@@ -71,22 +71,7 @@
                           alert("username already exist!");
                         }
                     });
-                    // var arr = {    
-                    //     "username": $("#username").val(), 
-                    //     "password": $("#password2").val(),
-                    //     "role"
-                    //     }; 
-                    // $.ajax({
-                    //     url: 'register',
-                    //     type: 'POST',
-                    //     data: JSON.stringify(arr),
-                    //     contentType: 'application/json; charset=utf-8',
-                    //     dataType: 'json'
-                    // }).done(function(data){
-                    //     alert("success"+data);
-                    // }).fail(function(data){
-                    //     alert("fail miserably"+data);
-                    // });
+                  
             });
     </script>
   </body>

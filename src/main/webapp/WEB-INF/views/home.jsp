@@ -44,7 +44,7 @@
       <main>
         <div class="panel panel-primary">
           <div class="panel-heading">Item Lists</div>
-          <table id="example" class="table table-hover" cellspacing="0" width="100%">
+          <table id="example" class="table table-hover" >
             <thead>
               <tr>
                 <th>Item Name</th>
@@ -95,9 +95,9 @@
     </div><!-- /container -->
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" language="javascript" class="init">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" class="init">
       var selectedID=0;
       $(document).ready(function() {
 
