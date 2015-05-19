@@ -7,11 +7,30 @@
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<http auto-config="true">
+		<!-- require user access -->
 		<intercept-url pattern="/" access="ROLE_USER" />
+		<intercept-url pattern="/getAllItems" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/placeBid" access="ROLE_USER" />
+		
+		<!-- require admin access -->		
+		<intercept-url pattern="/addItem" access="ROLE_ADMIN" />
+		<intercept-url pattern="/deleteItem" access="ROLE_ADMIN" />
+		<intercept-url pattern="/updateItem" access="ROLE_ADMIN" />
 		<intercept-url pattern="/formAddItem" access="ROLE_ADMIN" />
+		
+		<!-- no access -->
 		<intercept-url pattern="/formRegister" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<intercept-url pattern="/formLogin" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-		<form-login login-page="/formLogin"/>
+		
+<!-- 		<access-denied-handler error-page="/403" /> -->
+		<form-login 
+		    login-page="/formLogin" 
+		    default-target-url="/" 
+			authentication-failure-url="/formLogin?error" 
+			username-parameter="username"
+			password-parameter="password" />
+		<logout logout-success-url="/formLogin?logout"  />
+		<!-- enable csrf protection -->
 	</http>
 
 	<authentication-manager>

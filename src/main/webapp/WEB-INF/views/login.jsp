@@ -25,10 +25,10 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="password"  name="password" class="form-control" placeholder="Password" required >        
         <div class="checkbox">
-          
             <a type="checkbox" href="<c:url value='/formRegister' />" >Register</a>
-          
         </div>
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 
@@ -40,7 +40,7 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
     <script>
 
-            $("button").click(
+           /*  $("button").click(
 
                 function(){
                     var arr = {    
@@ -62,7 +62,7 @@
                         alert("fail miserably"+data);
                 });
 
-            });
+            }); */
            
     </script>
   </body>
