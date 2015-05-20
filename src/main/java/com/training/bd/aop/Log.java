@@ -62,7 +62,7 @@ public class Log{
 	 @Around("execution(* com.training.bd.services.UserService.usernameExists(..))") 
 	 public Object logAroundCheckingUsername(ProceedingJoinPoint jp) throws Throwable {		
 		long start = System.currentTimeMillis();
-		User obj =(User) jp.proceed();
+		StatusObject obj =(StatusObject) jp.proceed();
 		System.out.println("Check username---Execution Time: " + (System.currentTimeMillis() - start) + " ms");	
 		return obj;
 	 }
@@ -115,7 +115,8 @@ public class Log{
 	 public Object logAroundGettingAllItems(ProceedingJoinPoint jp) throws Throwable {
 		
 		long start = System.currentTimeMillis();
-		User obj =(User) jp.proceed();
+		@SuppressWarnings("unchecked")
+		List<Item> obj =(List<Item>) jp.proceed();
 		System.out.println("Requesting All Item List---Execution Time: " + (System.currentTimeMillis() - start) + " ms");	
 		return obj;
 	 }
@@ -143,7 +144,7 @@ public class Log{
 	 public Object logAroundGetItemDetails(ProceedingJoinPoint jp) throws Throwable {
 		
 		long start = System.currentTimeMillis();
-		User obj =(User) jp.proceed();
+		ItemDetails obj =(ItemDetails) jp.proceed();
 		System.out.println("Requesting details of item---Execution Time: " + (System.currentTimeMillis() - start) + " ms");	
 		return obj;
 	 }
@@ -173,15 +174,14 @@ public class Log{
 	 public Object logAroundSavingItem(ProceedingJoinPoint jp) throws Throwable {
 		
 		long start = System.currentTimeMillis();
-		User obj =(User) jp.proceed();
+		Item obj =(Item) jp.proceed();
 		System.out.println("Saving item---Execution Time: " + (System.currentTimeMillis() - start) + " ms");	
 		return obj;
 	 }
 	 
 	 @AfterReturning(pointcut = "execution(* com.training.bd.services.ItemService.saveItem(..))",
 			   returning= "result")
-	 public void logAfterSavingItem(JoinPoint joinPoint, Object result) {
-		 			 	
+	 public void logAfterSavingItem(JoinPoint joinPoint, Object result) {		 			 	
 		 	System.out.print("Saving item---done");		 	
 	 }
 	 
@@ -197,7 +197,7 @@ public class Log{
 	 @Around("execution(* com.training.bd.services.ItemService.updateItem(..))") 
 	 public Object logAroundUpdatingItem(ProceedingJoinPoint jp) throws Throwable {		
 		long start = System.currentTimeMillis();
-		User obj =(User) jp.proceed();
+		Item obj =(Item) jp.proceed();
 		System.out.println("Updating item---Execution Time: " + (System.currentTimeMillis() - start) + " ms");	
 		return obj;
 	 }
@@ -225,7 +225,7 @@ public class Log{
 	 public Object logAroundDeletingItem(ProceedingJoinPoint jp) throws Throwable {
 		
 		long start = System.currentTimeMillis();
-		User obj =(User) jp.proceed();
+		Item obj =(Item) jp.proceed();
 		System.out.println("Deleting item---Execution Time: " + (System.currentTimeMillis() - start) + " ms");	
 		return obj;
 	 }
@@ -251,7 +251,7 @@ public class Log{
 	 public Object logAroundPlacingBid(ProceedingJoinPoint jp) throws Throwable {
 		
 		long start = System.currentTimeMillis();
-		User obj =(User) jp.proceed();
+		StatusObject obj =(StatusObject) jp.proceed();
 		System.out.println("Placing BId---Execution Time: " + (System.currentTimeMillis() - start) + " ms");	
 		return obj;
 	 }

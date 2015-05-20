@@ -53,6 +53,8 @@ public class ItemServiceImpl implements ItemService{
 		bid.getUserID().setUserID(item.getUserID());
 		bid.setItem(itemMain);		
 		bidDAOImpl.addBidHistory(bid);
+		
+		
 		return itemMain;
 	}
 

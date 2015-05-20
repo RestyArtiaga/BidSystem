@@ -20,18 +20,19 @@ public class BidDAOImpl implements BidDAO {
 	@Override
 	public void addBidHistory(Bid bidHistory) {				
 		Session session = this.sessionFactory.openSession();		
-	    session.saveOrUpdate(bidHistory);	    
+	    session.saveOrUpdate(bidHistory);
+	    session.flush();
 	    session.close();
 	}
 	
 	
-	@Override
-	@SuppressWarnings("unchecked")
+	@Override	
 	public double getHighestBid(int itemID){
 		double flag = 0;		
 		Session session = this.sessionFactory.openSession();
 		String hqlUpdate = "select max(price) from " + Bid.class.getName() + " where itemID = :itemID";
 		Query query = session.createQuery( hqlUpdate ).setInteger( "itemID", itemID);
+		@SuppressWarnings("unchecked")
 		List<Double> resultSet = (List<Double>) query.list();		
 		session.close();
 		if(resultSet.size()>=1)
@@ -41,13 +42,15 @@ public class BidDAOImpl implements BidDAO {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
+	
 	public List<Bid> getBidHistoryOf(int itemID) {
-		 Session session = this.sessionFactory.openSession(); 		   
+		 Session session = this.sessionFactory.openSession(); 	
+		 @SuppressWarnings("unchecked")
 		 List<Bid> list =(List<Bid>) session.createCriteria(Bid.class).list();  		   
 		 session.close();
 		 return list; 
 	}
+	
 	
 	@Override
 	public void updateCurrentPrice(Bid bid){
@@ -57,13 +60,13 @@ public class BidDAOImpl implements BidDAO {
 	}
 
 
-	@Override
-	@SuppressWarnings("unchecked")
+	@Override	
 	public List<Integer> getAllBiddersOn(int itemID) {
 			
 		Session session = this.sessionFactory.openSession();
 		String hqlUpdate = "select distinct(userID) from " + Bid.class.getName() + " where itemID = :itemID";
 		Query query = session.createQuery( hqlUpdate ).setInteger( "itemID", itemID);
+		@SuppressWarnings("unchecked")
 		List<Integer> resultSet = (List<Integer>) query.list();		
 		session.close();
 		
