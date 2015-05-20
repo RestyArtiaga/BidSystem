@@ -13,6 +13,7 @@ import com.training.bd.models.Item;
 import com.training.bd.models.User;
 import com.training.bd.webModels.ItemDetails;
 import com.training.bd.webModels.ItemFromWeb;
+import com.training.bd.webModels.StatusObject;
 
 @Service
 @Transactional
@@ -35,7 +36,7 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public void saveItem(ItemFromWeb item) {
+	public Item saveItem(ItemFromWeb item) {
 		Item itemMain = new Item();
 		itemMain.setItemID(item.getItemID());
 		itemMain.setDuration(item.getDuration());
@@ -52,16 +53,20 @@ public class ItemServiceImpl implements ItemService{
 		bid.getUserID().setUserID(item.getUserID());
 		bid.setItem(itemMain);		
 		bidDAOImpl.addBidHistory(bid);
+		return itemMain;
 	}
 
 	@Override
-	public void deleteItem(int itemID) {
+	public StatusObject deleteItem(int itemID) {
+		StatusObject obj = new StatusObject();
 		itemDAOImpl.deleteItem(itemID);
 		bidDAOImpl.deleteBidHistoryOn(itemID);
+		obj.setStatus(true);
+		return obj;
 	}
 
 	@Override
-	public void updateItem(ItemFromWeb item) {
+	public Item updateItem(ItemFromWeb item) {
 		Item itemMain = new Item();
 		itemMain.setItemID(item.getItemID());
 		itemMain.setDuration(item.getDuration());
@@ -72,7 +77,7 @@ public class ItemServiceImpl implements ItemService{
 		itemMain.getUser().setUserID(item.getUserID());
 		
 		itemDAOImpl.updateItem(itemMain);
-						    		    	    
+		
 		Bid bid = new Bid();		
 		bid.setPrice(item.getPrice());
 		bid.setUserID(new User());
@@ -87,6 +92,7 @@ public class ItemServiceImpl implements ItemService{
 			bidDAOImpl.deleteBidHistoryOn(item.getItemID());
 			bidDAOImpl.addBidHistory(bid);
 		}
+		return itemMain;
 	}
 
 

@@ -14,6 +14,7 @@ import com.training.bd.models.Item;
 import com.training.bd.services.ItemService;
 import com.training.bd.webModels.ItemDetails;
 import com.training.bd.webModels.ItemFromWeb;
+import com.training.bd.webModels.StatusObject;
 
 
 @Controller
@@ -36,19 +37,17 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value="/addItem",consumes="application/json", method = RequestMethod.POST)
-	public @ResponseBody Object item(@RequestBody ItemFromWeb item){
-		itemServiceImpl.saveItem(item);		
-		return item;
+	public @ResponseBody Item item(@RequestBody ItemFromWeb item){
+		return itemServiceImpl.saveItem(item);				
 	}
 	
 	@RequestMapping(value="/deleteItem",method = RequestMethod.DELETE)
-	public @ResponseBody void itemDelete(@RequestParam(value="itemID", required=true) int itemID){
-		itemServiceImpl.deleteItem(itemID);
+	public @ResponseBody StatusObject itemDelete(@RequestParam(value="itemID", required=true) int itemID){
+		return itemServiceImpl.deleteItem(itemID);
 	}
 	
 	@RequestMapping(value="/updateItem",consumes="application/json", method = RequestMethod.POST)
-	public @ResponseBody Object update(@RequestBody ItemFromWeb item){
-		itemServiceImpl.updateItem(item);
-		return item;
+	public @ResponseBody Item update(@RequestBody ItemFromWeb item){
+		return itemServiceImpl.updateItem(item);		
 	}
 }

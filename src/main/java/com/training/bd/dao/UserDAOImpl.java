@@ -35,9 +35,7 @@ public class UserDAOImpl implements UserDAO{
 		if(list.size()>0){
 			flag=list.get(0);
 		}					
-		return flag;
-		
-
+		return flag;		
 	}
 	
 

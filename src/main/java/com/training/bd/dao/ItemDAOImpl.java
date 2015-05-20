@@ -68,10 +68,11 @@ public class ItemDAOImpl implements ItemDAO{
 	}
 
 	@Override
-	public void saveItem(Item item) {				
+	public Item saveItem(Item item) {				
 		Session session = this.sessionFactory.openSession();			
 		session.save(item);	    			    
-	    session.close();	    
+	    session.close();
+	    return item;
 	}
 	
 	
@@ -83,16 +84,17 @@ public class ItemDAOImpl implements ItemDAO{
 		Item item = new Item();
 		item.setItemID(itemID);
 		session.delete(item);
-		session.flush();					
+		session.flush();			 
 	}
 
 	
 	@Override
-	public void updateItem(Item item) {
+	public Item updateItem(Item item) {
 		Session session = this.sessionFactory.openSession();
 		session.update(item);
 		session.flush();
-	    session.close();		
+	    session.close();
+	    return item;
 	}
 				
 }

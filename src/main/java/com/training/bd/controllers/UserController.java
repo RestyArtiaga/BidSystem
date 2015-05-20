@@ -39,7 +39,9 @@ public class UserController {
 	
 	@RequestMapping(value = "/register",consumes="application/json", method = RequestMethod.POST)
 	public @ResponseBody User reg(@RequestBody final UserFromWeb user){
-		return userService.register(user);		
+		User use =  userService.register(user);
+		System.out.println("blkjasdlkjsadf");
+		return use;
 	}
 	
 	
