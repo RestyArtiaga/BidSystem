@@ -20,42 +20,27 @@ public class ItemDAOImpl implements ItemDAO{
 	
 
 	
-	@Override
-	@SuppressWarnings("unchecked")
-	public ItemDetails getItemDetails(int itemID) {
-		ItemDetails flag = new ItemDetails();
+	
+	
+	@Override	
+	public Item getItem(int itemID) {
+		Item flag = new Item();
 		Session session = this.sessionFactory.openSession();
 		Query query = session.createQuery("from " + Item.class.getName() +" where itemID = :id");		
-		query.setParameter("id", itemID);		
+		query.setParameter("id", itemID);
+		@SuppressWarnings("unchecked")
 		List<Item> list = (List<Item>) query.list();		
 		session.close();
 	
 		if(list.size()>0){
-			flag.setItem(list.get(0));
+			flag = list.get(0);
 		}
-		
-		flag.setHighestBid(getHighestBid(itemID));
-					
+				
 		return flag;
 	}
 	
-
-	@SuppressWarnings("unchecked")
-	public Bid getHighestBid(int itemID){
-		Bid flag = new Bid();
-		
-		Session session = this.sessionFactory.openSession();
-		Query query = session.createQuery("from " + Bid.class.getName() +" where itemID = :id order by price desc ");		
-		query.setParameter("id", itemID);
-		query.setMaxResults(1);
-		List<Bid> list = (List<Bid>) query.list();	
-		session.close();
-		
-		if(list.size()>0){
-			flag=list.get(0);
-		}
-		return flag; 		
-	}
+	
+	
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -74,10 +59,7 @@ public class ItemDAOImpl implements ItemDAO{
 	    session.close();
 	    return item;
 	}
-	
-	
-	
-
+		
 	@Override
 	public void deleteItem(int itemID) {
 		Session session = this.sessionFactory.openSession();

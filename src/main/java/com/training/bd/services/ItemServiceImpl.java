@@ -27,7 +27,10 @@ public class ItemServiceImpl implements ItemService{
 	
 	@Override
 	public ItemDetails getItemDetails(int itemID) {
-		return itemDAOImpl.getItemDetails(itemID);
+		ItemDetails item = new ItemDetails();
+		item.setItem(itemDAOImpl.getItem(itemID));
+		item.setHighestBid(bidDAOImpl.getHighestBidOf(itemID));
+		return item;
 	}
 
 	@Override

@@ -41,8 +41,7 @@ public class BidDAOImpl implements BidDAO {
 		return flag; 		
 	}
 
-	@Override
-	
+	@Override	
 	public List<Bid> getBidHistoryOf(int itemID) {
 		 Session session = this.sessionFactory.openSession(); 	
 		 @SuppressWarnings("unchecked")
@@ -59,6 +58,22 @@ public class BidDAOImpl implements BidDAO {
 		session.close();		
 	}
 
+	@Override
+	public Bid getHighestBidOf(int itemID){
+		Bid flag = new Bid();		
+		Session session = this.sessionFactory.openSession();
+		Query query = session.createQuery("from " + Bid.class.getName() +" where itemID = :id order by price desc ");		
+		query.setParameter("id", itemID);
+		query.setMaxResults(1);
+		@SuppressWarnings("unchecked")
+		List<Bid> list = (List<Bid>) query.list();	
+		session.close();
+		
+		if(list.size()>0){
+			flag=list.get(0);
+		}
+		return flag; 		
+	}
 
 	@Override	
 	public List<Integer> getAllBiddersOn(int itemID) {
